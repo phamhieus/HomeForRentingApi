@@ -1,0 +1,17 @@
+C:\Users\phamb\source\repos\AspImp\Contracts\bin\Debug\netcoreapp3.1\Contracts.deps.json
+C:\Users\phamb\source\repos\AspImp\Contracts\bin\Debug\netcoreapp3.1\Contracts.dll
+C:\Users\phamb\source\repos\AspImp\Contracts\bin\Debug\netcoreapp3.1\Contracts.pdb
+C:\Users\phamb\source\repos\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.csprojAssemblyReference.cache
+C:\Users\phamb\source\repos\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.AssemblyInfoInputs.cache
+C:\Users\phamb\source\repos\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.AssemblyInfo.cs
+C:\Users\phamb\source\repos\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\phamb\source\repos\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.dll
+C:\Users\phamb\source\repos\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\bin\Debug\netcoreapp3.1\Contracts.deps.json
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\bin\Debug\netcoreapp3.1\Contracts.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\bin\Debug\netcoreapp3.1\Contracts.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.AssemblyInfoInputs.cache
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.AssemblyInfo.cs
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.csproj.CoreCompileInputs.cache
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\obj\Debug\netcoreapp3.1\Contracts.pdb

@@ -1,0 +1,3 @@
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\bin\Release\netcoreapp3.1\publish\Contracts.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\bin\Release\netcoreapp3.1\publish\Contracts.deps.json
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\bin\Release\netcoreapp3.1\publish\Contracts.pdb

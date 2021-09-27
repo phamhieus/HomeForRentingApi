@@ -1,0 +1,15 @@
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\LoggerService.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\LoggerService.runtimeconfig.json
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\LoggerService.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\Microsoft.Extensions.DependencyInjection.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\Microsoft.Extensions.Logging.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\Microsoft.Extensions.Logging.Abstractions.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\Microsoft.Extensions.Options.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\Microsoft.Extensions.Primitives.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\NLog.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\NLog.Extensions.Logging.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\System.Diagnostics.DiagnosticSource.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\Contracts.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\Contracts.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Release\netcoreapp3.1\publish\LoggerService.deps.json

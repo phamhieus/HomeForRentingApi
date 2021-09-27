@@ -1,0 +1,12 @@
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\bin\Release\netcoreapp3.1\Data.deps.json
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\bin\Release\netcoreapp3.1\Data.runtimeconfig.json
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\bin\Release\netcoreapp3.1\Data.runtimeconfig.dev.json
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\bin\Release\netcoreapp3.1\Data.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\bin\Release\netcoreapp3.1\Data.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Release\netcoreapp3.1\Data.csproj.AssemblyReference.cache
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Release\netcoreapp3.1\Data.AssemblyInfoInputs.cache
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Release\netcoreapp3.1\Data.AssemblyInfo.cs
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Release\netcoreapp3.1\Data.csproj.CoreCompileInputs.cache
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Release\netcoreapp3.1\Data.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Release\netcoreapp3.1\Data.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Release\netcoreapp3.1\Data.genruntimeconfig.cache
