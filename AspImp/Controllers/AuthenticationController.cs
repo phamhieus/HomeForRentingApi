@@ -5,11 +5,13 @@ using Contracts;
 using Data.DTO;
 using Data.Entities;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 using Repository.Interfaces;
 
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AspImp.Controllers
@@ -72,6 +74,29 @@ namespace AspImp.Controllers
       token = await (_authManager.CreateToken());
 
       return Ok(token);
+    }
+
+    [HttpPost("reset-password")]
+    [Authorize]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+    {
+      if (!ModelState.IsValid)
+      {
+        _logger.LogError("Invalid model state for the ResetPasswordDto object");
+        return UnprocessableEntity(ModelState);
+      }
+
+      Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+      User user = await _userManager.FindByNameAsync(userId.Value);
+
+      if (user != null && await _userManager.CheckPasswordAsync(user, resetPasswordDto.RecentPassword))
+      {
+        string token = await (_authManager.CreateToken());
+
+        return Ok(token);
+      }
+
+      return BadRequest("Pass is not correct!");
     }
 
   }
