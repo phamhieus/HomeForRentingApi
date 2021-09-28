@@ -10,6 +10,8 @@ using Swashbuckle.SwaggerUi;
 using NLog;
 
 using System.IO;
+using Microsoft.AspNetCore.HttpOverrides;
+using System.Net;
 
 namespace AspImp
 {
@@ -30,6 +32,12 @@ namespace AspImp
       services.ConfigureCors();
       services.ConfigureModelError();
       services.ConfigureIISIntegration();
+
+      services.Configure<ForwardedHeadersOptions>(options =>
+      {
+        options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
+      });
+
       services.ConfigureSqlContext(Configuration);
       services.ConfigureRepositoryManager();
       services.ConfigureJWT(Configuration);
@@ -51,6 +59,11 @@ namespace AspImp
       {
         app.UseDeveloperExceptionPage();
       }
+
+      app.UseForwardedHeaders(new ForwardedHeadersOptions
+      {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+      });
 
       app.UseHttpsRedirection();
       app.UseStaticFiles();

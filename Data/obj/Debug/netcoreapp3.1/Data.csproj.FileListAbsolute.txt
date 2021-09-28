@@ -21,3 +21,4 @@ E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Debug\netcoreapp3.1\Data.csproj.CoreCo
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Debug\netcoreapp3.1\Data.dll
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Debug\netcoreapp3.1\Data.pdb
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Debug\netcoreapp3.1\Data.genruntimeconfig.cache
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Data\obj\Debug\netcoreapp3.1\Data.csprojAssemblyReference.cache

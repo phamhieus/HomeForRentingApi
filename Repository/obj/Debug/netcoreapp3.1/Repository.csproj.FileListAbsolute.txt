@@ -25,4 +25,4 @@ E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Repository\obj\Debug\netcoreapp3.1\Repository.c
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.CopyComplete
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Repository\obj\Debug\netcoreapp3.1\Repository.dll
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Repository\obj\Debug\netcoreapp3.1\Repository.pdb
-E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.AssemblyReference.cache
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Repository\obj\Debug\netcoreapp3.1\Repository.csprojAssemblyReference.cache
