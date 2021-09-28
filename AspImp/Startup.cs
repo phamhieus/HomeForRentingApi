@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Swashbuckle.Swagger;
+using Swashbuckle.SwaggerUi;
 using NLog;
 
 using System.IO;
@@ -36,6 +37,7 @@ namespace AspImp
       services.ConfigureIdentity();
       services.ConfigureAuth();
 
+      services.AddSwaggerGen();
       services.AddControllers();
       services.AddAuthentication();
       services.AddHttpContextAccessor();
@@ -61,6 +63,11 @@ namespace AspImp
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
+      });
+
+      app.UseSwagger();
+      app.UseSwaggerUI(c => {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Rentinghouse API V1");
       });
     }
   }
