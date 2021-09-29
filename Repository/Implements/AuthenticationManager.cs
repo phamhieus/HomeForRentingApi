@@ -72,7 +72,7 @@ namespace Repository.Implements
       return claims;
     }
 
-    private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
+    private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claimApis)
     {
       var jwtSettings = _configuration.GetSection("JwtSettings");
 
@@ -80,7 +80,7 @@ namespace Repository.Implements
       (
         issuer: jwtSettings.GetSection("validIssuer").Value,
         audience: jwtSettings.GetSection("validAudience").Value,
-        claims: claims,
+        claims: claimApis,
         expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("expires").Value)),
         signingCredentials: signingCredentials
       );

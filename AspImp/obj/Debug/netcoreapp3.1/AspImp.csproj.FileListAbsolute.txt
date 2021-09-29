@@ -171,3 +171,8 @@ E:\Hoc-hanh\Do-an\ApiImpr\AspImp\AspImp\bin\Debug\netcoreapp3.1\System.Web.Http.
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\AspImp\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\AspImp\bin\Debug\netcoreapp3.1\Swashbuckle.Core.dll
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\AspImp\bin\Debug\netcoreapp3.1\WebActivatorEx.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\AspImp\bin\Debug\netcoreapp3.1\System.Web.Razor.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\AspImp\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\AspImp\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\AspImp\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\AspImp\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll

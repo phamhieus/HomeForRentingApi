@@ -16,6 +16,7 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace AspImp.Controllers
 {
@@ -123,18 +124,25 @@ namespace AspImp.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
     {
-      bool validUser = await _authManager.ValidateUser(user);
-      string token = string.Empty;
-
-      if (!validUser)
+      try
       {
-        _logger.LogWarn($"{nameof(Authenticate)}: Authentication failed. Wrong user name or password.");
-        return Unauthorized();
+        bool validUser = await _authManager.ValidateUser(user);
+        string token = string.Empty;
+
+        if (!validUser)
+        {
+          _logger.LogWarn($"{nameof(Authenticate)}: Authentication failed. Wrong user name or password.");
+          return Unauthorized();
+        }
+
+        token = await _authManager.CreateToken();
+
+        return Ok((new { accessToken = token}));
       }
-
-      token = await (_authManager.CreateToken());
-
-      return Ok(token);
+      catch(Exception e)
+      {
+        return BadRequest(e.Message);
+      }
     }
 
     /// <summary>
