@@ -12,6 +12,7 @@ namespace AspImp
 {
   public class Program
   {
+#pragma warning disable CS1591
     public static void Main(string[] args)
     {
       CreateHostBuilder(args).Build().Run();
@@ -23,5 +24,6 @@ namespace AspImp
             {
               webBuilder.UseStartup<Startup>().UseUrls("http://0.0.0.0:5000");
             });
+#pragma warning restore CS1591
   }
 }

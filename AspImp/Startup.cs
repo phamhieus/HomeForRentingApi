@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Swashbuckle.Swagger;
-using Swashbuckle.SwaggerUi;
 using NLog;
 
 using System.IO;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Net;
+using System;
+using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 namespace AspImp
 {
@@ -45,10 +46,17 @@ namespace AspImp
       services.ConfigureIdentity();
       services.ConfigureAuth();
 
-      services.AddSwaggerGen();
       services.AddControllers();
       services.AddAuthentication();
       services.AddHttpContextAccessor();
+
+      services.AddSwaggerGen(c =>
+      {
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        c.IncludeXmlComments(xmlPath);
+      });
+
       services.AddAutoMapper(typeof(Startup));
     }
 
@@ -79,9 +87,7 @@ namespace AspImp
       });
 
       app.UseSwagger();
-      app.UseSwaggerUI(c => {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Rentinghouse API V1");
-      });
+      app.UseSwaggerUI();
     }
   }
 }

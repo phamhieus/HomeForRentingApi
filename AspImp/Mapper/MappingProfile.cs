@@ -14,6 +14,10 @@ namespace AspImp.Mapper
       opt => opt.MapFrom(x => string.Join(' ', x.Address, x.Country)));
 
       CreateMap<UserForRegistrationDto, User>();
+      CreateMap<MessageDto, Message>();
+      CreateMap<RoomDto, Room>();
+      CreateMap<CommentedUserDto, User>();
+
     }
   }
 

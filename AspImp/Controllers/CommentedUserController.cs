@@ -47,9 +47,9 @@ namespace AspImp.Controllers
       try
       {
         IEnumerable<CommentedUser> commentedUsers = _repository.CommentedUser.GetAllCommentedUsers(trackChanges: false);
-        IEnumerable<RoomDto> roomDtos = _mapper.Map<IEnumerable<RoomDto>>(commentedUsers);
+        IEnumerable<CommentedUserDto> commentedUserDtos = _mapper.Map<IEnumerable<CommentedUserDto>>(commentedUsers);
 
-        return Ok(roomDtos);
+        return Ok(commentedUserDtos);
       }
       catch (Exception ex)
       {
@@ -59,27 +59,27 @@ namespace AspImp.Controllers
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetRoomById(Guid id)
+    public IActionResult GetCommentedUserById(Guid id)
     {
       try
       {
-        var room = _repository.Room.GetRoom(id, trackChanges: false);
-        var roomDto = _mapper.Map<IEnumerable<RoomDto>>(room);
+        var commentedUser = _repository.CommentedUser.GetCommentedUser(id, trackChanges: false);
+        var commentedUserDto = _mapper.Map<IEnumerable<CommentedUser>>(commentedUser);
 
-        return Ok(roomDto);
+        return Ok(commentedUserDto);
       }
       catch (Exception ex)
       {
-        _logger.LogError($"Something went wrong in the {nameof(GetRoomById)} action {ex}");
+        _logger.LogError($"Something went wrong in the {nameof(GetCommentedUserById)} action {ex}");
 
         return StatusCode(500, "Internal server error");
       }
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateRoom([FromBody] RoomDto roomDto)
+    public async Task<IActionResult> CreateCommentedUser([FromBody] CommentedUserDto commentedUserDto)
     {
-      if (roomDto == null)
+      if (commentedUserDto == null)
       {
         _logger.LogError("EmployeeForCreationDto object sent from client is null.");
         return BadRequest("EmployeeForCreationDto object is null");
@@ -94,35 +94,35 @@ namespace AspImp.Controllers
       Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
       User user = await _userManager.FindByNameAsync(userId.Value);
 
-      Room room = _mapper.Map<Room>(roomDto);
+      CommentedUser commentedUser = _mapper.Map<CommentedUser>(commentedUserDto);
 
-      room.CreateDate = DateTime.Now;
-      room.UpdateDate = DateTime.Now;
+      commentedUser.CreateDate = DateTime.Now;
+      commentedUser.UpdateDate = DateTime.Now;
 
-      room.CreatedBy = user.Id;
-      room.UpdatedBy = user.Id;
+      commentedUser.CreatedBy = user.Id;
+      commentedUser.UpdatedBy = user.Id;
 
-      _repository.Room.CreateRoom(room);
+      _repository.CommentedUser.CreateCommentedUser(commentedUser);
       _repository.Save();
 
-      RoomDto roomToReturn = _mapper.Map<RoomDto>(room);
+      CommentedUserDto commentedUserToReturn = _mapper.Map<CommentedUserDto>(commentedUser);
 
       return CreatedAtRoute(
-        "GetRoomById",
+        "GetCommentedUserById",
         new
         {
-          id = roomToReturn.Id
+          id = commentedUserToReturn.Id
         },
-        roomToReturn
+        commentedUserToReturn
       );
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateRoom(Guid id, [FromBody] RoomDto roomDto)
+    public async Task<IActionResult> UpdateCommentedUser(Guid id, [FromBody] CommentedUserDto commentedUserDto)
     {
-      if (roomDto == null)
+      if (commentedUserDto == null)
       {
-        _logger.LogError("Room object sent from client is null.");
+        _logger.LogError("CommentedUser object sent from client is null.");
         return BadRequest("EmployeeForUpdateDto object is null");
       }
 
@@ -132,44 +132,44 @@ namespace AspImp.Controllers
         return UnprocessableEntity(ModelState);
       }
 
-      Room room = _repository.Room.GetRoom(id, trackChanges: false);
+      CommentedUser commentedUser = _repository.CommentedUser.GetCommentedUser(id, trackChanges: false);
 
-      if (room == null)
+      if (commentedUser == null)
       {
-        _logger.LogInfo($"Room with id: {id} doesn't exist in the database.");
-        return NotFound("Room not fond");
+        _logger.LogInfo($"CommentedUser with id: {id} doesn't exist in the database.");
+        return NotFound("CommentedUser not fond");
       }
 
       Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
       User user = await _userManager.FindByNameAsync(userId.Value);
 
-      _mapper.Map(roomDto, room);
+      _mapper.Map(commentedUserDto, commentedUser);
 
-      room.UpdateDate = DateTime.Now;
-      room.UpdatedBy = user.Id;
+      commentedUser.UpdateDate = DateTime.Now;
+      commentedUser.UpdatedBy = user.Id;
 
-      _repository.Room.UpdateRoom(room);
+      _repository.CommentedUser.UpdateCommentedUser(commentedUser);
       _repository.Save();
 
-      return Ok(roomDto);
+      return Ok(commentedUserDto);
     }
 
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteRoom(Guid id)
+    public IActionResult DeleteCommentedUser(Guid id)
     {
-      Room room = _repository.Room.GetRoom(id, trackChanges: false);
+      CommentedUser commentedUser = _repository.CommentedUser.GetCommentedUser(id, trackChanges: false);
 
-      if (room == null)
+      if (commentedUser == null)
       {
-        _logger.LogInfo($"Room with id: {id} doesn't exist in the database.");
-        return NotFound("Room doesn't exist in the database.");
+        _logger.LogInfo($"CommentedUser with id: {id} doesn't exist in the database.");
+        return NotFound("CommentedUser doesn't exist in the database.");
       }
 
-      _repository.Room.DeleteRoom(room);
+      _repository.CommentedUser.DeleteCommentedUser(commentedUser);
       _repository.Save();
 
-      return Ok("Room had been deleted!");
+      return Ok("CommentedUser had been deleted!");
     }
   }
 }
