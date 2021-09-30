@@ -25,7 +25,7 @@
             </remarks>
             <param name="userRegistry"></param>
             <returns></returns>
-            <response code="201">if user is valid and created</response>
+            <response code="200">if user is valid and created</response>
             <response code="400">If any property is not correct</response>  
         </member>
         <member name="M:AspImp.Controllers.AuthenticationController.Authenticate(Data.DTO.UserForAuthenticationDto)">
@@ -68,6 +68,20 @@
             <returns></returns>
             <response code="200">Returns new token of user</response>
             <response code="400">If the pass is imcorrect or newpass is not matched with confirm pass</response>  
+            <response code="401">If user didn't login </response>  
+        </member>
+        <member name="M:AspImp.Controllers.AuthenticationController.GetMe">
+            <summary>
+            get information of current user (Cần đăng nhập, có access token)
+            </summary>
+            <remarks>
+            Sample request:
+            
+             Get /api/authentication/getme
+             
+            </remarks>
+            <returns></returns>
+            <response code="200">Returns information of current user</response>
             <response code="401">If user didn't login </response>  
         </member>
     </members>

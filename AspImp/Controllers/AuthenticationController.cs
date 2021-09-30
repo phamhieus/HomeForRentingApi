@@ -14,6 +14,8 @@ using Repository.Interfaces;
 
 using System;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Helpers;
@@ -56,12 +58,12 @@ namespace AspImp.Controllers
     /// </remarks>
     /// <param name="userRegistry"></param>
     /// <returns></returns>
-    /// <response code="201">if user is valid and created</response>
+    /// <response code="200">if user is valid and created</response>
     /// <response code="400">If any property is not correct</response>  
     [HttpPost("register")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userRegistry)
+    public async Task<IActionResult> RegisterUser( [FromBody] UserForRegistrationDto userRegistry)
     {
       User user = _mapper.Map<User>(userRegistry);
 
@@ -73,6 +75,7 @@ namespace AspImp.Controllers
           {
             userRegistry.Roles = new string[] { "User" };
           }
+
           var response = await _userManager.CreateAsync(user, userRegistry.Password);
 
           if (!response.Succeeded)
@@ -87,7 +90,7 @@ namespace AspImp.Controllers
 
           await _userManager.AddToRolesAsync(user, userRegistry.Roles);
 
-          return StatusCode(201);
+          return Ok(user);
         }
         catch (Exception e)
         {
@@ -96,7 +99,7 @@ namespace AspImp.Controllers
       }
       else
       {
-        return UnprocessableEntity(ModelState);
+        return BadRequest(ModelState);
       }
     }
 
@@ -190,5 +193,25 @@ namespace AspImp.Controllers
       return BadRequest("Pass is not correct!");
     }
 
+    /// <summary>
+    /// get information of current user (Cần đăng nhập, có access token)
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    /// 
+    ///  Get /api/authentication/getme
+    ///  
+    /// </remarks>
+    /// <returns></returns>
+    /// <response code="200">Returns information of current user</response>
+    /// <response code="401">If user didn't login </response>  
+    [Authorize]
+    public async Task<IActionResult> GetMe()
+    {
+      Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+      User user = await _userManager.FindByNameAsync(userId.Value);
+      
+      return Ok(user);
+    }
   }
 }
