@@ -9,7 +9,7 @@ namespace Data.Common
     public const string ROOM_DIRECTORY = "room";
     public const string IMG_DIRECTORY = "images";
 
-    private const string _baseUrl = "http:localhost:5000/";
+    private const string _baseUrl = "http:103.159.50.133:5000/";
     private static readonly string[] vietnameseSigns = new string[]
     {
       "aAeEoOuUiIdDyY", "áàạảãâấầậẩẫăắằặẳẵ", "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ", "éèẹẻẽêếềệểễ",
