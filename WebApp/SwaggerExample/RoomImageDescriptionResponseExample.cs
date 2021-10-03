@@ -2,7 +2,7 @@
 using Swashbuckle.AspNetCore.Filters;
 using System.Collections.Generic;
 
-namespace WebApp.SwaggerExample
+namespace AspImp.SwaggerExample
 {
   public class RoomImageDescriptionResponseExample : IExamplesProvider<IEnumerable<RoomImageDto>>
   {

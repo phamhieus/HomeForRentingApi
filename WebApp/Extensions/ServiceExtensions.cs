@@ -22,7 +22,7 @@ using System.Reflection;
 using Microsoft.OpenApi.Models;
 using System.IO;
 
-namespace WebApp.Extensions
+namespace AspImp.Extensions
 {
   public static class ServiceExtensions
   {

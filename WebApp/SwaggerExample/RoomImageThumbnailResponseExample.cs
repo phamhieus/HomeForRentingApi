@@ -2,7 +2,7 @@
 using Swashbuckle.AspNetCore.Filters;
 using System;
 
-namespace WebApp.SwaggerExample
+namespace AspImp.SwaggerExample
 {
   public class RoomImageThumbnailResponseExample : IExamplesProvider<RoomImageDto>
   {

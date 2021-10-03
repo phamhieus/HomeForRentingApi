@@ -4,7 +4,7 @@ using Data.DTO.Responses;
 using Swashbuckle.AspNetCore.Filters;
 using System.Collections.Generic;
 
-namespace WebApp.SwaggerExample
+namespace AspImp.SwaggerExample
 {
   public class RoomDtoDetailResponseExample : IExamplesProvider<RoomDetailResponse>
   {

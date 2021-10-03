@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2i2jqpClGYhyv3BbCbfC3TYMnO+NMUB3pewRKZ/WdwzJtGhe/Q04UDf75VUv3uUpqjPPW0utmuzPbSdNKCVzVg==",
+  "dgSpecHash": "H7e4L1OKdUbohhyYz476PB6cRatmlOkNUF2AKPPGxDlTkNP9NqoCNveDlT2tRkzelM0YvZXoVzTKJAKJmQ/O8g==",
   "success": true,
-  "projectFilePath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\WebApp\\WebApp.csproj",
+  "projectFilePath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\WebApp\\AspImp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\phamb\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

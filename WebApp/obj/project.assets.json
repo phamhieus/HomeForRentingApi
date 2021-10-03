@@ -7961,9 +7961,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\WebApp\\WebApp.csproj",
-      "projectName": "WebApp",
-      "projectPath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\WebApp\\WebApp.csproj",
+      "projectUniqueName": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\WebApp\\AspImp.csproj",
+      "projectName": "AspImp",
+      "projectPath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\WebApp\\AspImp.csproj",
       "packagesPath": "C:\\Users\\phamb\\.nuget\\packages\\",
       "outputPath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\WebApp\\obj\\",
       "projectStyle": "PackageReference",

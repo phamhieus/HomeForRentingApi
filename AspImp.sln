@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{D41AE711-2BE9-427E-A0B9-EF3AAFBFAC35}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{C63D69AC-7A41-4B56-8E5D-36F63B9918A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspImp", "WebApp\AspImp.csproj", "{C63D69AC-7A41-4B56-8E5D-36F63B9918A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

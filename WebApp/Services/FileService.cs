@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 
-namespace WebApp.Services
+namespace AspImp.Services
 {
   public class FileService
   {

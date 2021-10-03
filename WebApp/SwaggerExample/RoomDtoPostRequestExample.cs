@@ -1,7 +1,7 @@
 ﻿using Data.DTO;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace WebApp.SwaggerExample
+namespace AspImp.SwaggerExample
 {
   public class RoomDtoPostRequestExample : IExamplesProvider<RoomDto>
   {

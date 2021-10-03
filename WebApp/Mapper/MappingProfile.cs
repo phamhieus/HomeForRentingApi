@@ -5,7 +5,7 @@ using Data.DTO;
 using Data.DTO.Responses;
 using Data.Entities;
 
-namespace WebApp.Mapper
+namespace AspImp.Mapper
 {
   public class MappingProfile : Profile
   {

@@ -1,4 +1,4 @@
-using WebApp.Extensions;
+using AspImp.Extensions;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,10 +13,10 @@ using System.Net;
 using System;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
-using WebApp.Services;
+using AspImp.Services;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace WebApp
+namespace AspImp
 {
   public class Startup
   {

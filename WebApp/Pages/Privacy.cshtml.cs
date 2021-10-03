@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Pages
+namespace AspImp.Pages
 {
   public class PrivacyModel : PageModel
   {

@@ -1,4 +1,4 @@
-﻿using WebApp.Services;
+﻿using AspImp.Services;
 using AutoMapper;
 using Contracts;
 using Data.Common;
@@ -16,12 +16,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using WebApp.SwaggerExample;
+using AspImp.SwaggerExample;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.Annotations;
 using Data.DTO.Responses;
 
-namespace WebApp.Controllers
+namespace AspImp.Controllers
 {
   [Route("api/[controller]")]
   [ApiController, Authorize]
@@ -378,7 +378,7 @@ namespace WebApp.Controllers
         return BadRequest("At least a file is invalid");
       }
 
-      if (!WebApp.Helpers.MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
+      if (!AspImp.Helpers.MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
       {
         return BadRequest("Not a multipart request");
       }

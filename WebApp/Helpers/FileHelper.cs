@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Net.Http.Headers;
 
-namespace WebApp.Helpers
+namespace AspImp.Helpers
 {
   public static class FileHelper
   {
