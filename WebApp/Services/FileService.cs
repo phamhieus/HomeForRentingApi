@@ -12,13 +12,8 @@ namespace AspImp.Services
 {
   public class FileService
   {
-    private readonly IHostEnvironment _env;
-    private readonly ILoggerManager _logger;
-
-    public FileService(IHostEnvironment env, ILoggerManager logger)
+    public FileService()
     {
-      _env = env;
-      _logger = logger;
     }
 
     public string WriteImageFile(string fileName, string fileFolder, IFormFile file)
@@ -26,7 +21,7 @@ namespace AspImp.Services
       try
       {
         string imageFolderPath = GetDirectoryPath(Constant.IMG_DIRECTORY, fileFolder);
-        string filePath = $"{imageFolderPath}\\{fileName}";
+        string filePath = $"{imageFolderPath}/{fileName}";
 
         using (var fileStream = new FileStream(filePath, FileMode.Create))
         {
@@ -37,7 +32,6 @@ namespace AspImp.Services
       }
       catch (Exception e)
       {
-        _logger.LogError($"Function WriteImageFile : {e.Message}");
         throw;
       }
     }
@@ -45,7 +39,7 @@ namespace AspImp.Services
     public void DeleteFile(string rootFolder, string folder, string fileName)
     {
       string imageFolderPath = GetDirectoryPath(rootFolder, folder);
-      string fullPath = $"{imageFolderPath}\\{fileName}";
+      string fullPath = $"{imageFolderPath}/{fileName}";
 
       System.IO.File.Delete(fullPath);
     }
@@ -55,7 +49,11 @@ namespace AspImp.Services
       try
       {
         string imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", rootFolder);
-        string destinationFolderPath = Path.Combine(Directory.GetCurrentDirectory(), $"{imageFolderPath}\\{folder}");
+        
+        string destinationFolderPath = Path.Combine(
+          Directory.GetCurrentDirectory(), 
+          $"{imageFolderPath}/{folder}")
+        .Replace("\\", "/");
 
         if (!Directory.Exists(imageFolderPath))
         {
@@ -71,7 +69,6 @@ namespace AspImp.Services
       }
       catch (Exception e)
       {
-        _logger.LogError( $"Function GetDirectoryPath : {e.Message}");
         throw;
       }
     }
