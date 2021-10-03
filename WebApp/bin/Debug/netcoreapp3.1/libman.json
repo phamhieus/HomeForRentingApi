@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "jsdelivr",
+  "libraries": [
+    {
+      "library": "vutimoji@1.0.4",
+      "destination": "lib/vutimoji/"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ namespace Repository.Implements
     
     private ICompanyRepository _companyRepository;
     private ICommentedUserRepository _commentedUserRepository;
+    private IRoomImageRepository _roomImageRepository;
     private IEmployeeRepository _employeeRepository;
     private IMessageRepository _messageRepository;
     private IRoomRepository _roomRepository;
@@ -82,6 +83,21 @@ namespace Repository.Implements
         return _commentedUserRepository;
       }
     }
+
+    public IRoomImageRepository RoomImage
+    {
+      get
+      {
+        if (_roomImageRepository == null)
+        {
+          _roomImageRepository = new RoomImageRepository(_context);
+        }
+
+        return _roomImageRepository;
+      }
+    }
+
+    
 
     public void Save() => _context.SaveChanges();
   }

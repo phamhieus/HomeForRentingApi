@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Data.Common;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -12,7 +14,7 @@ namespace Data.Entities
     public string ShortName { get; set; }
 
     [Required(ErrorMessage = "Discription is a required field.")]
-    public string Discription { get; set; }
+    public string Description { get; set; }
 
     [Required(ErrorMessage = "Address is a required field.")]
     [MaxLength(500, ErrorMessage = "Maximum length for the Address is 500 characters.")]
@@ -24,6 +26,8 @@ namespace Data.Entities
     [Required(ErrorMessage = "Cost is a required field.")]
     public long Cost { get; set; }
 
-    public int Type { get; set; }
+    public RoomType Type { get; set; }
+
+    public RoomStatus Status { get; set; }
   }
 }

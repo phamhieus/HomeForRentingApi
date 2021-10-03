@@ -15,7 +15,7 @@ namespace Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.3");
+                .HasAnnotation("ProductVersion", "5.0.10");
 
             modelBuilder.Entity("Data.Entities.CommentedUser", b =>
                 {
@@ -88,6 +88,26 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new byte[] { 83, 192, 212, 201, 182, 73, 12, 65, 188, 120, 45, 84, 169, 153, 24, 112 },
+                            Address = "583 Wall Dr. Gwynn Oak, MD 21207",
+                            Country = "USA",
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "IT_Solutions Ltd",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new byte[] { 112, 10, 73, 61, 206, 148, 21, 77, 148, 148, 82, 72, 40, 12, 44, 227 },
+                            Address = "312 Forest Avenue, BF 923",
+                            Country = "USA",
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Admin_Solutions Ltd",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Data.Entities.Employee", b =>
@@ -130,6 +150,38 @@ namespace Data.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new byte[] { 168, 188, 171, 128, 77, 102, 32, 75, 181, 222, 2, 71, 5, 73, 125, 74 },
+                            Age = 26,
+                            CompanyId = new byte[] { 83, 192, 212, 201, 182, 73, 12, 65, 188, 120, 45, 84, 169, 153, 24, 112 },
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sam Raiden",
+                            Position = "Software developer",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new byte[] { 192, 168, 219, 134, 120, 209, 231, 65, 147, 140, 237, 73, 119, 143, 181, 42 },
+                            Age = 30,
+                            CompanyId = new byte[] { 83, 192, 212, 201, 182, 73, 12, 65, 188, 120, 45, 84, 169, 153, 24, 112 },
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Jana McLeaf",
+                            Position = "Software developer",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new byte[] { 193, 163, 28, 2, 235, 13, 253, 74, 174, 148, 33, 89, 168, 71, 152, 17 },
+                            Age = 35,
+                            CompanyId = new byte[] { 112, 10, 73, 61, 206, 148, 21, 77, 148, 148, 82, 72, 40, 12, 44, 227 },
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Kane Miller",
+                            Position = "Administrator",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Data.Entities.Message", b =>
@@ -190,6 +242,9 @@ namespace Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -202,6 +257,48 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("Data.Entities.RoomImage", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileExtension")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("text");
+
+                    b.Property<int>("FileType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<byte[]>("RoomId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoomImages");
                 });
 
             modelBuilder.Entity("Data.Entities.User", b =>
@@ -298,6 +395,29 @@ namespace Data.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ba5f7a22-a09f-4823-85e0-45663c6a3009",
+                            ConcurrencyStamp = "65f83e4c-bc31-41aa-ba57-174a063e38ed",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = "31774689-64a6-405f-a1e3-15efe439139e",
+                            ConcurrencyStamp = "9bc3d47e-5ecc-4927-867e-04738b408f68",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "073b705b-c3e7-48a7-a44e-f97e375109d8",
+                            ConcurrencyStamp = "cabc2a0a-286c-40f6-9003-eb30b16ee33d",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

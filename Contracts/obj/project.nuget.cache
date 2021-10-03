@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YT9IOyZuWNH4f1Wr1RRJLB5xjaYx1KeXFwSwEsD61gV7Wt480B2NuYFCnoGDityXyQ46f8EwkK0IhlCWpZ+79g==",
+  "dgSpecHash": "hnS1vx9Ei/dIUQdMBMcZELenc7rESg0ekLxsRWez/5bzayqA6bnnaYhV0Y3kT49KiSPyjl3s5xOEhxWORLoClQ==",
   "success": true,
-  "projectFilePath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\AspImp\\Contracts\\Contracts.csproj",
+  "projectFilePath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\Contracts\\Contracts.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

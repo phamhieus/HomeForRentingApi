@@ -20,6 +20,7 @@ E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Debug\netcoreapp3.1\LoggerSer
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Debug\netcoreapp3.1\LoggerService.pdb
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Debug\netcoreapp3.1\Contracts.dll
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\bin\Debug\netcoreapp3.1\Contracts.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.csprojAssemblyReference.cache
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.AssemblyInfoInputs.cache
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.AssemblyInfo.cs
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.csproj.CoreCompileInputs.cache
@@ -27,4 +28,18 @@ E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerSer
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.dll
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.pdb
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.genruntimeconfig.cache
-E:\Hoc-hanh\Do-an\ApiImpr\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.csproj.AssemblyReference.cache
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\bin\Debug\netcoreapp3.1\LoggerService.deps.json
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\bin\Debug\netcoreapp3.1\LoggerService.runtimeconfig.json
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\bin\Debug\netcoreapp3.1\LoggerService.runtimeconfig.dev.json
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\bin\Debug\netcoreapp3.1\LoggerService.dll
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\bin\Debug\netcoreapp3.1\LoggerService.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\bin\Debug\netcoreapp3.1\Contracts.dll
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\bin\Debug\netcoreapp3.1\Contracts.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.csproj.AssemblyReference.cache
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.AssemblyInfoInputs.cache
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.AssemblyInfo.cs
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.csproj.CoreCompileInputs.cache
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.csproj.CopyComplete
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.dll
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\LoggerService\obj\Debug\netcoreapp3.1\LoggerService.genruntimeconfig.cache

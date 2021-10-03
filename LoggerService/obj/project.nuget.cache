@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+Kv3IpNoBUEjzej++5nD6YkhsOtHbIICG005eJ57bZ3Dwq8ZU0dgtr+MrgKW0b5ErTySnD6RLENuLhpZPnTaQg==",
+  "dgSpecHash": "rpkIF53BNHwCljdtu28gQallOUCcIv6XSk8IX9ldxfyvLmtgaZRZpWyXA9TmFeg/d/GttW6gY6A61+C4XBcd4w==",
   "success": true,
-  "projectFilePath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\AspImp\\LoggerService\\LoggerService.csproj",
+  "projectFilePath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\LoggerService\\LoggerService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\phamb\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

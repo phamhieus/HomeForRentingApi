@@ -12,6 +12,8 @@
 
     IRoomRepository Room { get; }
 
+    IRoomImageRepository RoomImage { get; }
+
     void Save();
   }
 }
