@@ -464,45 +464,52 @@ namespace AspImp.Controllers
 
     private RoomImage CreateNewRoomImage(Room room, User user, IFormFile imageFile, ImageType fileType)
     {
-      RoomImage previousThumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(room.Id, false);
-      RoomImage roomImage = new RoomImage()
+      try
       {
-        FileType = fileType,
-        FileExtension = Path.GetExtension(imageFile.FileName),
-        RoomId = room.Id,
+        RoomImage previousThumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(room.Id, false);
+        RoomImage roomImage = new RoomImage()
+        {
+          FileType = fileType,
+          FileExtension = Path.GetExtension(imageFile.FileName),
+          RoomId = room.Id,
 
-        IsActive = true,
-        CreateDate = DateTime.Now,
-        CreatedBy = user.Id,
-        UpdateDate = DateTime.Now,
-        UpdatedBy = user.Id
-      };
+          IsActive = true,
+          CreateDate = DateTime.Now,
+          CreatedBy = user.Id,
+          UpdateDate = DateTime.Now,
+          UpdatedBy = user.Id
+        };
 
-      if (previousThumbnail != null)
-      {
-        previousThumbnail.IsActive = false;
-        _repository.RoomImage.UpdateRoomImage(previousThumbnail);
+        if (previousThumbnail != null)
+        {
+          previousThumbnail.IsActive = false;
+          _repository.RoomImage.UpdateRoomImage(previousThumbnail);
+        }
+
+        _repository.RoomImage.CreateRoomImage(roomImage);
+        _repository.Save();
+
+        string fileName = Constant.RemoveSign4VietnameseString(room.ShortName);
+
+        fileName = Regex.Replace(fileName, @"[^0-9a-z-A-Z ]", "");
+        fileName = fileName.Replace(" ", "-") + "-";
+        fileName += roomImage.Id;
+        fileName += roomImage.FileExtension;
+
+        roomImage.FileName = fileName;
+        roomImage.FilePath = Constant.GetImageRoomPath(roomImage.FileName);
+
+        _repository.RoomImage.UpdateRoomImage(roomImage);
+        _repository.Save();
+
+        _fileService.WriteImageFile(roomImage.FileName, Constant.ROOM_DIRECTORY, imageFile);
+
+        return roomImage;
       }
-
-      _repository.RoomImage.CreateRoomImage(roomImage);
-      _repository.Save();
-
-      string fileName = Constant.RemoveSign4VietnameseString(room.ShortName);
-
-      fileName = Regex.Replace(fileName, @"[^0-9a-z-A-Z ]", "");
-      fileName = fileName.Replace(" ", "-") + "-";
-      fileName += roomImage.Id;
-      fileName += roomImage.FileExtension;
-
-      roomImage.FileName = fileName;
-      roomImage.FilePath = Constant.GetImageRoomPath(roomImage.FileName);
-
-      _repository.RoomImage.UpdateRoomImage(roomImage);
-      _repository.Save();
-
-      _fileService.WriteImageFile(roomImage.FileName, Constant.ROOM_DIRECTORY, imageFile);
-
-      return roomImage;
+      catch(Exception e)
+      {
+        throw;
+      }
     }
   }
 }

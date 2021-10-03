@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AspImp</name>
+    </assembly>
+    <members>
+        <member name="M:AspImp.Controllers.AuthenticationController.RegisterUser(Data.DTO.UserForRegistrationDto)">
+            <summary>
+            register api
+            </summary>
+            <remarks>
+            Sample request:
+            
+             POST /api/authentication/register
+             {
+                "firstname": "Jonh",
+                "lastname": "Doe",
+                "username": "JDoe",
+                "email": "phamhieutb.dev@gmail.com",
+                "password": "Password100;",
+                "phonenumber": "33333",
+                "roles": [ "User"], //Default will be user
+              }
+              
+            </remarks>
+            <param name="userRegistry"></param>
+            <returns></returns>
+            <response code="201">if user is valid and created</response>
+            <response code="400">If any property is not correct</response>  
+        </member>
+        <member name="M:AspImp.Controllers.AuthenticationController.Authenticate(Data.DTO.UserForAuthenticationDto)">
+             <summary>
+             login api
+             </summary>
+             <remarks>
+             Sample request:
+             
+                POST /Todo
+                {
+                    "id": 1,
+                    "name": "Item1",
+                    "isComplete": true
+                 }
+            
+               
+             </remarks>
+             <param name="user"></param>
+             <returns>Token</returns>
+             <response code="200">Returns token of user</response>
+             <response code="400">If the pass or username is imcorrect</response>  
+        </member>
+        <member name="M:AspImp.Controllers.AuthenticationController.ResetPassword(Data.DTO.ResetPasswordDto)">
+            <summary>
+            reset password api
+            </summary>
+            <remarks>
+            Sample request:
+            
+             POST /api/authentication/reset-password
+             {
+                "recentPassword": "Password100",
+                "newPassword": "Password101",
+                "confirmPassword": "Password101"
+             }
+             
+            </remarks>
+            <param name="resetPasswordDto"></param>
+            <returns></returns>
+            <response code="200">Returns new token of user</response>
+            <response code="400">If the pass is imcorrect or newpass is not matched with confirm pass</response>  
+            <response code="401">If user didn't login </response>  
+        </member>
+        <member name="M:AspImp.Controllers.AuthenticationController.GetMe">
+            <summary>
+            get information of current user (Cần đăng nhập, có access token)
+            </summary>
+            <remarks>
+            Sample request:
+            
+             Get /api/authentication/getme
+             
+            </remarks>
+            <returns></returns>
+            <response code="200">Returns information of current user</response>
+            <response code="401">If user didn't login </response>  
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.GetAll">
+            <summary>
+            get all room api
+            </summary>
+            <remarks>
+            Sample request:
+            
+             Get /api/room
+              
+            </remarks>
+            <returns></returns>
+            <response code="200">List of room</response>
+            <response code="401">If user didn't login </response>  
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.GetRoomById(System.Guid)">
+            <summary>
+            get room by id api
+            </summary>
+            <remarks>
+            Sample request:
+            
+             Get /api/room/{roomId}
+              
+            </remarks>
+            <returns></returns>
+            <response code="200">Detail of room</response>
+            <response code="401">If user didn't login </response>  
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.CreateRoom(Data.DTO.RoomDto)">
+            <summary>
+            create new room api
+            </summary>
+            <remarks>
+            Sample request:
+            
+            Post /api/room/
+            
+            status:  đã cho thuê = 0, đang trống = 1, đang tim bạn cùng phòng = 2
+            
+            Type: Cho thuê chính chủ = 0, tim bạn cùng phòng = 1
+            
+            </remarks>
+            <returns></returns>
+            <response code="201">Detail of room</response>
+            <response code="401">If user didn't login </response>  
+            <response code="400">If one property is invalid </response>  
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.UpdateRoom(System.Guid,Data.DTO.RoomDto)">
+            <summary>
+            update room api
+            </summary>
+            <remarks>
+            Sample request:
+            
+            PUT /api/room/{roomId}
+            
+            status:  đã cho thuê = 0, đang trống = 1, đang tim bạn cùng phòng = 2
+            
+            Type: Cho thuê chính chủ = 0, tim bạn cùng phòng = 1
+            
+            </remarks>
+            <returns></returns>
+            <response code="200">Detail of room</response>
+            <response code="401">If user didn't login </response>
+            <response code="400">If one property is invalid </response>  
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.DeleteRoom(System.Guid)">
+            <summary>
+            delete room api
+            </summary>
+            <remarks>
+            Sample request:
+            
+            Delete /api/room/{roomId}
+            
+            status:  đã cho thuê = 0, đang trống = 1, đang tim bạn cùng phòng = 2
+            
+            Type: Cho thuê chính chủ = 0, tim bạn cùng phòng = 1
+            
+            </remarks>
+            <returns></returns>
+            <response code="200">Delete success</response>
+            <response code="401">If user didn't login </response>
+            <response code="404">If room is not found </response>  
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.UploadRoomImageThumbnail(System.Guid)">
+            <summary>
+            upload new room thumbnail
+            </summary>
+            <remarks>
+            Sample request:
+            
+            Put /api/room/thumbnail/{roomId}
+            
+            Type: ảnh đại diện = 1, ảnh chi tiết = 2
+            
+            </remarks>
+            <returns></returns>
+            <response code="200">Upload success</response>
+            <response code="401">If user didn't login </response>
+            <response code="404">If room is not found </response> 
+            <response code="400">If one property is invalid </response>  
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.UploadRoomImageDescription(System.Guid)">
+            <summary>
+            upload new description image
+            </summary>
+            <remarks>
+            Sample request:
+            
+            Put /api/room/description-image/{roomId}
+            
+            Type: ảnh đại diện = 1, ảnh chi tiết = 2
+            
+            </remarks>
+            <returns></returns>
+            <response code="200">Upload success</response>
+            <response code="401">If user didn't login </response>
+            <response code="404">If room is not found </response> 
+            <response code="400">If one property is invalid </response>  
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.DeleteRoomImage(System.Guid)">
+            <summary>
+            delete room image
+            </summary>
+            <remarks>
+            Sample request:
+            
+            Put /api/room/room-image/{imageId}
+            
+            Type: ảnh đại diện = 1, ảnh chi tiết = 2
+            
+            </remarks>
+            <returns></returns>
+            <response code="200">Upload success</response>
+            <response code="401">If user didn't login </response>
+            <response code="404">If room is not found </response> 
+        </member>
+    </members>
+</doc>
