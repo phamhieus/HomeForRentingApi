@@ -70,7 +70,7 @@ namespace AspImp.Controllers
         IEnumerable<Room> rooms = _repository.Room.GetAllRooms(trackChanges: false);
         IEnumerable<RoomSamuryResponse> roomDtos = _mapper.Map<IEnumerable<RoomSamuryResponse>>(rooms);
 
-        foreach(var roomDto in roomDtos)
+        foreach (var roomDto in roomDtos)
         {
           RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
           RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
@@ -318,25 +318,32 @@ namespace AspImp.Controllers
     [SwaggerResponseExample(StatusCodes.Status200OK, typeof(RoomImageThumbnailResponseExample))]
     public async Task<IActionResult> UploadRoomImageThumbnail(Guid id)
     {
-      var imageFiles = this.Request.Form.Files;
-
-      if (imageFiles == null || !imageFiles.Any() || imageFiles.Count > 1)
+      try
       {
-        return BadRequest("Please, upload a single file");
+        var imageFiles = this.Request.Form.Files;
+
+        if (imageFiles == null || !imageFiles.Any() || imageFiles.Count > 1)
+        {
+          return BadRequest("Please, upload a single file");
+        }
+
+        Room room = _repository.Room.GetRoom(id, trackChanges: false);
+
+        Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        User user = await _userManager.FindByIdAsync(userId.Value);
+
+        if (room == null)
+        {
+          _logger.LogInfo($"Room with id: {id} doesn't exist in the database.");
+          return NotFound("Room not fond");
+        }
+
+        return Ok(CreateNewRoomImage(room, user, imageFiles[0], ImageType.Thumbnail));
       }
-
-      Room room = _repository.Room.GetRoom(id, trackChanges: false);
-
-      Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-      User user = await _userManager.FindByIdAsync(userId.Value);
-
-      if (room == null)
+      catch (Exception e)
       {
-        _logger.LogInfo($"Room with id: {id} doesn't exist in the database.");
-        return NotFound("Room not fond");
+        return StatusCode(StatusCodes.Status500InternalServerError, e);
       }
-
-      return Ok(CreateNewRoomImage(room, user, imageFiles[0], ImageType.Thumbnail));
     }
 
     /// <summary>
@@ -364,46 +371,53 @@ namespace AspImp.Controllers
     [SwaggerResponseExample(StatusCodes.Status200OK, typeof(RoomImageDescriptionResponseExample))]
     public async Task<IActionResult> UploadRoomImageDescription(Guid id)
     {
-      var imageFiles = this.Request.Form.Files;
-
-      if (imageFiles == null || imageFiles.Count <= 0)
+      try
       {
-        return BadRequest("Please, upload at least a file");
+        var imageFiles = this.Request.Form.Files;
+
+        if (imageFiles == null || imageFiles.Count <= 0)
+        {
+          return BadRequest("Please, upload at least a file");
+        }
+
+        var invalidFiles = imageFiles.Where(file => file.Length < 0);
+
+        if (invalidFiles != null && invalidFiles.Any())
+        {
+          return BadRequest("At least a file is invalid");
+        }
+
+        if (!AspImp.Helpers.MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
+        {
+          return BadRequest("Not a multipart request");
+        }
+
+        Room room = _repository.Room.GetRoom(id, trackChanges: false);
+
+        Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        User user = await _userManager.FindByIdAsync(userId.Value);
+
+        IList<RoomImageDto> roomImageDtos = new List<RoomImageDto>();
+
+        if (room == null)
+        {
+          _logger.LogInfo($"Room with id: {id} doesn't exist in the database.");
+          return NotFound("Room not fond");
+        }
+
+        foreach (var imageFile in imageFiles)
+        {
+          RoomImage roomImage = CreateNewRoomImage(room, user, imageFile, ImageType.DescriptionImage);
+
+          roomImageDtos.Add(_mapper.Map<RoomImageDto>(roomImage));
+        }
+
+        return Ok(roomImageDtos);
       }
-
-      var invalidFiles = imageFiles.Where(file => file.Length < 0);
-
-      if (invalidFiles != null && invalidFiles.Any())
+      catch (Exception e)
       {
-        return BadRequest("At least a file is invalid");
+        return StatusCode(StatusCodes.Status500InternalServerError, e);
       }
-
-      if (!AspImp.Helpers.MultipartRequestHelper.IsMultipartContentType(Request.ContentType))
-      {
-        return BadRequest("Not a multipart request");
-      }
-
-      Room room = _repository.Room.GetRoom(id, trackChanges: false);
-
-      Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-      User user = await _userManager.FindByIdAsync(userId.Value);
-
-      IList<RoomImageDto> roomImageDtos = new List<RoomImageDto>();
-
-      if (room == null)
-      {
-        _logger.LogInfo($"Room with id: {id} doesn't exist in the database.");
-        return NotFound("Room not fond");
-      }
-
-      foreach (var imageFile in imageFiles)
-      {
-        RoomImage roomImage = CreateNewRoomImage(room, user, imageFile, ImageType.DescriptionImage);
-
-        roomImageDtos.Add(_mapper.Map<RoomImageDto>(roomImage));
-      }
-
-      return Ok(roomImageDtos);
     }
 
     /// <summary>
