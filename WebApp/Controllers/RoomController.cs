@@ -179,6 +179,9 @@ namespace AspImp.Controllers
       room.CreatedBy = user.Id;
       room.UpdatedBy = user.Id;
 
+      room.Mounth = DateTime.Now.Month;
+      room.Year = DateTime.Now.Month;
+
       _repository.Room.CreateRoom(room);
       _repository.Save();
 
