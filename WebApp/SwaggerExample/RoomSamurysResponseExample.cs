@@ -35,6 +35,7 @@ namespace AspImp.SwaggerExample
         Service = "Điện 3k5",
         Cost = 15000000,
         Type = Data.Common.RoomType.FindingRoomate,
+        RoomType = Data.Common.RentingType.FullHome,
         ThumbnailImage = roomImageDto1,
         Status = 0
       };
@@ -47,6 +48,7 @@ namespace AspImp.SwaggerExample
         Service = "Điện 3k5",
         Cost = 15000000,
         Type = Data.Common.RoomType.FindingRoomate,
+        RoomType = Data.Common.RentingType.FullHome,
         ThumbnailImage = roomImageDto2,
         Status = 0
       };

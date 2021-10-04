@@ -18,6 +18,7 @@ namespace AspImp.SwaggerExample
         Street = "triều khuc",
         Cost = 15000000,
         Type = Data.Common.RoomType.FindingRoomate,
+        RoomType =Data.Common.RentingType.FullHome,
         Status = 0
       };
     }

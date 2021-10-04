@@ -142,6 +142,8 @@ namespace AspImp.Controllers
     /// 
     /// Type: Cho thuê chính chủ = 0, tim bạn cùng phòng = 1
     /// 
+    /// RoomType:  Homestay= 0, nguyên căn = 1, phòng đơn = 2
+    /// 
     /// </remarks>
     /// <returns></returns>
     /// <response code="201">Detail of room</response>
@@ -208,6 +210,8 @@ namespace AspImp.Controllers
     /// status:  đã cho thuê = 0, đang trống = 1, đang tim bạn cùng phòng = 2
     /// 
     /// Type: Cho thuê chính chủ = 0, tim bạn cùng phòng = 1
+    /// 
+    /// RoomType:  Homestay= 0, nguyên căn = 1, phòng đơn = 2
     /// 
     /// </remarks>
     /// <returns></returns>
@@ -408,11 +412,18 @@ namespace AspImp.Controllers
           return NotFound("Room not fond");
         }
 
+        bool isFirstImage = true;
+
         foreach (var imageFile in imageFiles)
         {
           RoomImage roomImage = CreateNewRoomImage(room, user, imageFile, ImageType.DescriptionImage);
-
           roomImageDtos.Add(_mapper.Map<RoomImageDto>(roomImage));
+         
+          if (isFirstImage)
+          {
+            CreateNewRoomImage(room, user, imageFile, ImageType.Thumbnail);
+            isFirstImage = false;
+          }
         }
 
         return Ok(roomImageDtos);
@@ -469,7 +480,6 @@ namespace AspImp.Controllers
     {
       try
       {
-        RoomImage previousThumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(room.Id, false);
         RoomImage roomImage = new RoomImage()
         {
           FileType = fileType,
@@ -483,10 +493,15 @@ namespace AspImp.Controllers
           UpdatedBy = user.Id
         };
 
-        if (previousThumbnail != null)
+        if ( fileType == ImageType.Thumbnail)
         {
-          previousThumbnail.IsActive = false;
-          _repository.RoomImage.UpdateRoomImage(previousThumbnail);
+          RoomImage previousThumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(room.Id, false);
+
+          if(previousThumbnail != null)
+          {
+            previousThumbnail.IsActive = false;
+            _repository.RoomImage.UpdateRoomImage(previousThumbnail);
+          }
         }
 
         _repository.RoomImage.CreateRoomImage(roomImage);

@@ -19,9 +19,6 @@ namespace Data.DTO
     [MaxLength(500, ErrorMessage = "Maximum length for the Address is 500 characters.")]
     public string Address { get; set; }
 
-    [Required(ErrorMessage = "Service is a required field.")]
-    public string Service { get; set; }
-
     [Required(ErrorMessage = "Cost is a required field.")]
     public long Cost { get; set; }
 
@@ -35,6 +32,8 @@ namespace Data.DTO
     public string City { get; set; }
 
     public RoomType Type { get; set; }
+
+    public RentingType RoomType { get; set; }
 
     public RoomStatus Status { get; set; }
   }

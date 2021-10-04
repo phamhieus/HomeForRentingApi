@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Data.Common
 {
-  public enum RoomStatus
+  public enum RentingType
   {
-    Empty,
-    Rented,
-    FindingRoomate
+    Homestay,
+    FullHome,
+    SingleRoom
   }
 }

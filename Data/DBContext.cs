@@ -28,5 +28,6 @@ namespace Data
     public DbSet<Message> Messages { get; set; }
     public DbSet<CommentedUser> CommentedUsers { get; set; }
     public DbSet<RoomImage> RoomImages { get; set; }
+    public DbSet<UserImage> UserImages { get; set; }
   }
 }
