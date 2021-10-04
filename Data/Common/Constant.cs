@@ -8,6 +8,7 @@ namespace Data.Common
   {
     public const string ROOM_DIRECTORY = "room";
     public const string IMG_DIRECTORY = "images";
+    public const string USER_DIRECTORY = "user";
 
     private const string _baseUrl = "http:103.159.50.133:5000/";
     private static readonly string[] vietnameseSigns = new string[]

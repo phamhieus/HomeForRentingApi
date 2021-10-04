@@ -15,6 +15,7 @@ using System.Reflection;
 using Microsoft.OpenApi.Models;
 using AspImp.Services;
 using Swashbuckle.AspNetCore.Filters;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace AspImp
 {
@@ -39,6 +40,11 @@ namespace AspImp
       services.Configure<ForwardedHeadersOptions>(options =>
       {
         options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
+      });
+
+      services.Configure<FormOptions>(options =>
+      {
+        options.MemoryBufferThreshold = Int32.MaxValue;
       });
 
       services.ConfigureSqlContext(Configuration);

@@ -509,7 +509,7 @@ namespace AspImp.Controllers
 
         return roomImage;
       }
-      catch(Exception e)
+      catch
       {
         throw;
       }

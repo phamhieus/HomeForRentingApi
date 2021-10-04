@@ -30,7 +30,7 @@ namespace AspImp.Services
 
         return filePath;
       }
-      catch (Exception e)
+      catch 
       {
         throw;
       }
@@ -67,7 +67,7 @@ namespace AspImp.Services
 
         return destinationFolderPath;
       }
-      catch (Exception e)
+      catch 
       {
         throw;
       }

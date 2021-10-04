@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Data.Entities
 {
-  public class RoomImage : BaseEntity
+  public class UserImage : BaseEntity
   {
     public string FilePath { get; set; }
 
@@ -18,8 +18,8 @@ namespace Data.Entities
 
     public ImageType FileType { get; set; }
 
-    [ForeignKey(nameof(Room))]
-    public Guid RoomId { get; set; }
+    [ForeignKey(nameof(User))]
+    public string UserId { get; set; }
 
     [DefaultValue(true)]
     public bool IsActive { get; set; }

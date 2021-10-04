@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace AspImp.Controllers
 {
@@ -66,7 +64,7 @@ namespace AspImp.Controllers
 
 
     [HttpPost]
-    public async Task<IActionResult> CreateMessage([FromBody] MessageDto messageDto)
+    public IActionResult CreateMessage([FromBody] MessageDto messageDto)
     {
       if (messageDto == null)
       {

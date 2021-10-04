@@ -8,6 +8,7 @@ namespace Repository.Implements
     private DBContext _context;
     
     private ICompanyRepository _companyRepository;
+    private IUserImageRepository _userImageRepository;
     private ICommentedUserRepository _commentedUserRepository;
     private IRoomImageRepository _roomImageRepository;
     private IEmployeeRepository _employeeRepository;
@@ -97,7 +98,18 @@ namespace Repository.Implements
       }
     }
 
-    
+    public IUserImageRepository UserImage
+    {
+      get
+      {
+        if (_userImageRepository == null)
+        {
+          _userImageRepository = new UserImageRepository(_context);
+        }
+
+        return _userImageRepository;
+      }
+    }
 
     public void Save() => _context.SaveChanges();
   }

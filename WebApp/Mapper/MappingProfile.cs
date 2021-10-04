@@ -15,18 +15,30 @@ namespace AspImp.Mapper
         .ForMember(c => c.FullAddress,
           opt => opt.MapFrom(x => string.Join(' ', x.Address, x.Country)));
 
-      CreateMap<UserForRegistrationDto, User>();
-      CreateMap<MessageDto, Message>();
-      CreateMap<CommentedUserDto, User>();
-
-      CreateMap<User, UserForRegistrationDto>();
-      CreateMap<Message, MessageDto>();
-
-      CreateMap<CommentedUser, CommentedUserDto>();
-
+      CreateUserMaping();
       CreateRoomMaping();
+      CreateMessageMaping();
+      CreateCommentedUserMaping();
     }
- 
+
+    public void CreateMessageMaping()
+    {
+      CreateMap<Message, MessageDto>().ReverseMap();
+    }
+
+    public void CreateUserMaping()
+    {
+      CreateMap<User, UserDetailResponse>();
+      CreateMap<User, UserUpdateDto>().ReverseMap();
+      CreateMap<User, UserForRegistrationDto>().ReverseMap();
+
+      CreateMap<UserImage, UserImageDto>()
+        .ForMember(dto => dto.ImageId, opt => opt.MapFrom(e => e.Id))
+        .ForMember(dto => dto.UserId, opt => opt.MapFrom(e => e.UserId))
+        .ForMember(dto => dto.ImageName, opt => opt.MapFrom(e => e.FileName))
+        .ForMember(dto => dto.Url, opt => opt.MapFrom(e => Constant.GetFileUrl(e.FilePath)));
+    }
+
     public void CreateRoomMaping()
     {
       CreateMap<Room, RoomSamuryResponse>();
@@ -38,6 +50,11 @@ namespace AspImp.Mapper
         .ForMember(dto => dto.RoomId, opt => opt.MapFrom(e => e.RoomId))
         .ForMember(dto => dto.ImageName, opt => opt.MapFrom(e => e.FileName))
         .ForMember(dto=>dto.Url, opt=>opt.MapFrom(e=> Constant.GetFileUrl(e.FilePath)));
+    }
+
+    public void CreateCommentedUserMaping()
+    {
+      CreateMap<CommentedUser, CommentedUserDto>().ReverseMap();
     }
   }
 }
