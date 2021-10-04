@@ -326,7 +326,7 @@ namespace AspImp.Controllers
         _repositoryManager.UserImage.UpdateUserImage(userImage);
         _repositoryManager.Save();
 
-        _fileService.WriteImageFile(userImage.FileName, Constant.USER_DIRECTORY, imageFiles[0]);
+        _fileService.WriteImageFile(userImage.FileName, Constant.ROOM_DIRECTORY, imageFiles[0]);
 
         UserDetailResponse userDetailResponse = _mapper.Map<UserDetailResponse>(user);
         userDetailResponse.ThumbnailImage = _mapper.Map<UserImageDto>(userImage);
