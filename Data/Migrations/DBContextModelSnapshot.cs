@@ -220,6 +220,10 @@ namespace Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<long>("Cost")
                         .HasColumnType("bigint");
 
@@ -229,13 +233,19 @@ namespace Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<string>("Discription")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Service")
+                    b.Property<int>("Mounth")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Province")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("RoomType")
+                        .HasColumnType("int");
 
                     b.Property<string>("ShortName")
                         .IsRequired()
@@ -245,6 +255,10 @@ namespace Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -253,6 +267,9 @@ namespace Data.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("text");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -371,6 +388,47 @@ namespace Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Data.Entities.UserImage", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileExtension")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("text");
+
+                    b.Property<int>("FileType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserImages");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -399,22 +457,22 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ba5f7a22-a09f-4823-85e0-45663c6a3009",
-                            ConcurrencyStamp = "65f83e4c-bc31-41aa-ba57-174a063e38ed",
+                            Id = "31fe503e-1463-4650-a79b-579499bf7063",
+                            ConcurrencyStamp = "7aa59a08-d066-4f24-a8f7-e10080d88dfc",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "31774689-64a6-405f-a1e3-15efe439139e",
-                            ConcurrencyStamp = "9bc3d47e-5ecc-4927-867e-04738b408f68",
+                            Id = "fb90e263-f742-40bd-a9fc-f41608364789",
+                            ConcurrencyStamp = "c0b67ebc-ea36-4050-a929-0d9c9ed729ad",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "073b705b-c3e7-48a7-a44e-f97e375109d8",
-                            ConcurrencyStamp = "cabc2a0a-286c-40f6-9003-eb30b16ee33d",
+                            Id = "413c3c67-cc52-4dc3-95e3-87a6296761c4",
+                            ConcurrencyStamp = "a7fa7f54-282a-4af1-b263-bceac02c02e1",
                             Name = "User",
                             NormalizedName = "USER"
                         });
