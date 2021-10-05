@@ -183,9 +183,14 @@ namespace AspImp.Controllers
 
       if (user != null && await _userManager.CheckPasswordAsync(user, resetPasswordDto.RecentPassword))
       {
-        string token = await (_authManager.CreateToken());
+        var result = await _userManager.ChangePasswordAsync(user, resetPasswordDto.RecentPassword, resetPasswordDto.NewPassword);
+       
+        if(result == IdentityResult.Success)
+        {
+          return Ok("Change password success!");
+        }
 
-        return Ok(token);
+        return BadRequest(result);
       }
 
       return BadRequest("Pass is not correct!");
