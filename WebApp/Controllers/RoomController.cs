@@ -104,12 +104,17 @@ namespace AspImp.Controllers
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(RoomDtoDetailResponseExample))]
     [SwaggerResponseExample(StatusCodes.Status201Created, typeof(RoomDtoDetailResponseExample))]
-    public IActionResult GetRoomById(Guid id)
+    public async Task<IActionResult> GetRoomById(Guid id)
     {
       try
       {
         Room room = _repository.Room.GetRoom(id, trackChanges: false);
         RoomDetailResponse roomDetailRequest = _mapper.Map<RoomDetailResponse>(room);
+
+        if(room == null)
+        {
+          return NotFound("Room is not found");
+        }
 
         IEnumerable<RoomImage> roomDescriptionImages = _repository.RoomImage.GetImagesOfRoom(room.Id, false);
         IEnumerable<RoomImageDto> roomDescriptionImageDtos = _mapper.Map<IEnumerable<RoomImageDto>>(roomDescriptionImages);
@@ -117,8 +122,17 @@ namespace AspImp.Controllers
         RoomImage roomThumbnailImage = _repository.RoomImage.GetThumbnailImagesOfRoom(room.Id, false);
         RoomImageDto roomThumbnailImageDto = _mapper.Map<RoomImageDto>(roomThumbnailImage);
 
+        User user = await _userManager.FindByIdAsync(room.CreatedBy);
+        UserDetailResponse userDetailResponse = _mapper.Map<UserDetailResponse>(user);
+
+        UserImage userImage = _repository.UserImage.GetUserThumbnail(user.Id, false);
+        UserImageDto userImageDto = _mapper.Map<UserImageDto>(userImage);
+
+        userDetailResponse.ThumbnailImage = userImageDto;
+
         roomDetailRequest.ThumbnailImage = roomThumbnailImageDto;
         roomDetailRequest.DescriptionImages = roomDescriptionImageDtos;
+        roomDetailRequest.Owner = userDetailResponse;
 
         return Ok(roomDetailRequest);
       }

@@ -10,5 +10,7 @@ namespace Data.DTO.Responses
     public RoomImageDto ThumbnailImage { get; set; }
 
     public IEnumerable<RoomImageDto> DescriptionImages { get; set; }
+
+    public UserDetailResponse Owner { get; set; }
   }
 }
