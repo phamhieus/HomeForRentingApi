@@ -183,14 +183,19 @@ namespace AspImp.Controllers
 
       if (user != null && await _userManager.CheckPasswordAsync(user, resetPasswordDto.RecentPassword))
       {
-        var result = await _userManager.ChangePasswordAsync(user, resetPasswordDto.RecentPassword, resetPasswordDto.NewPassword);
-       
-        if(result == IdentityResult.Success)
+        if(resetPasswordDto.RecentPassword != resetPasswordDto.NewPassword)
         {
-          return Ok("Change password success!");
+          var result = await _userManager.ChangePasswordAsync(user, resetPasswordDto.RecentPassword, resetPasswordDto.NewPassword);
+
+          if (result == IdentityResult.Success)
+          {
+            return Ok("Change password success!");
+          }
+
+          return BadRequest(result);
         }
 
-        return BadRequest(result);
+        return BadRequest("RecentPassword doesn't allow to be matched NewPassword!");
       }
 
       return BadRequest("Pass is not correct!");
