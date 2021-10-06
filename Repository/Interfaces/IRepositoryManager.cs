@@ -6,7 +6,7 @@
 
     IEmployeeRepository Employee { get; }
 
-    ICommentedUserRepository CommentedUser {get;}
+    ICommentedUserRepository CommentedUser { get; }
 
     IMessageRepository Message { get; }
 
@@ -15,6 +15,11 @@
     IRoomImageRepository RoomImage { get; }
 
     IUserImageRepository UserImage { get; }
+
+    ICityRepository City { get; }
+
+    IProvinceRepository Province { get; }
+    IAwardRepository Award { get; }
 
     void Save();
   }

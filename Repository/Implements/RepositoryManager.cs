@@ -14,6 +14,9 @@ namespace Repository.Implements
     private IEmployeeRepository _employeeRepository;
     private IMessageRepository _messageRepository;
     private IRoomRepository _roomRepository;
+    private ICityRepository _cityRepository;
+    private IProvinceRepository _provinceRepository;
+    private IAwardRepository _awardRepository;
 
     public RepositoryManager(DBContext context)
     {
@@ -108,6 +111,45 @@ namespace Repository.Implements
         }
 
         return _userImageRepository;
+      }
+    }
+
+    public ICityRepository City
+    {
+      get
+      {
+        if (_cityRepository == null)
+        {
+          _cityRepository = new CityRepository(_context);
+        }
+
+        return _cityRepository;
+      }
+    }
+
+    public IAwardRepository Award
+    {
+      get
+      {
+        if (_awardRepository == null)
+        {
+          _awardRepository = new AwardRepository(_context);
+        }
+
+        return _awardRepository;
+      }
+    }
+
+    public IProvinceRepository Province
+    {
+      get
+      {
+        if (_provinceRepository == null)
+        {
+          _provinceRepository = new ProvinceRepository(_context);
+        }
+
+        return _provinceRepository;
       }
     }
 
