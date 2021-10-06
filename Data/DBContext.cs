@@ -29,5 +29,8 @@ namespace Data
     public DbSet<CommentedUser> CommentedUsers { get; set; }
     public DbSet<RoomImage> RoomImages { get; set; }
     public DbSet<UserImage> UserImages { get; set; }
+    public DbSet<ProvinceArea> ProvinceArea { get; set; }
+    public DbSet<CityArea> CityAreas { get; set; }
+    public DbSet<AwardArea> AwardAreas { get; set; }
   }
 }

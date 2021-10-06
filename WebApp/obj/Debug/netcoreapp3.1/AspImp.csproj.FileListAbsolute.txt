@@ -275,7 +275,6 @@ E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\bin\Debug\netcoreapp3.
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\bin\Debug\netcoreapp3.1\Data.pdb
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\bin\Debug\netcoreapp3.1\LoggerService.pdb
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\bin\Debug\netcoreapp3.1\Repository.pdb
-E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Debug\netcoreapp3.1\AspImp.csprojAssemblyReference.cache
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Debug\netcoreapp3.1\AspImp.AssemblyInfoInputs.cache
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Debug\netcoreapp3.1\AspImp.AssemblyInfo.cs
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Debug\netcoreapp3.1\AspImp.csproj.CoreCompileInputs.cache
@@ -303,3 +302,4 @@ E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Debug\netcoreapp3.
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Debug\netcoreapp3.1\AspImp.dll
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Debug\netcoreapp3.1\AspImp.pdb
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Debug\netcoreapp3.1\AspImp.genruntimeconfig.cache
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Debug\netcoreapp3.1\AspImp.csproj.AssemblyReference.cache

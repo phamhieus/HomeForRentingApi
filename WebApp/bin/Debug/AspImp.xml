@@ -29,41 +29,18 @@
             <response code="400">If any property is not correct</response>  
         </member>
         <member name="M:AspImp.Controllers.AuthenticationController.Authenticate(Data.DTO.UserForAuthenticationDto)">
-             <summary>
-             login api
-             </summary>
-             <remarks>
-             Sample request:
-             
-                POST /Todo
-                {
-                    "id": 1,
-                    "name": "Item1",
-                    "isComplete": true
-                 }
-            
-               
-             </remarks>
-             <param name="user"></param>
-             <returns>Token</returns>
-             <response code="200">Returns token of user</response>
-             <response code="400">If the pass or username is imcorrect</response>  
+            <summary>
+            login api
+            </summary>
+            <param name="user"></param>
+            <returns>Token</returns>
+            <response code="200">Returns token of user</response>
+            <response code="400">If the pass or username is imcorrect</response>  
         </member>
         <member name="M:AspImp.Controllers.AuthenticationController.ResetPassword(Data.DTO.ResetPasswordDto)">
             <summary>
             reset password api
             </summary>
-            <remarks>
-            Sample request:
-            
-             POST /api/authentication/reset-password
-             {
-                "recentPassword": "Password100",
-                "newPassword": "Password101",
-                "confirmPassword": "Password101"
-             }
-             
-            </remarks>
             <param name="resetPasswordDto"></param>
             <returns></returns>
             <response code="200">Returns new token of user</response>
@@ -73,6 +50,20 @@
         <member name="M:AspImp.Controllers.AuthenticationController.GetMe">
             <summary>
             get information of current user (Cần đăng nhập, có access token)
+            </summary>
+            <remarks>
+            Sample request:
+            
+             Get /api/authentication/getme
+             
+            </remarks>
+            <returns></returns>
+            <response code="200">Returns information of current user</response>
+            <response code="401">If user didn't login </response>  
+        </member>
+        <member name="M:AspImp.Controllers.AuthenticationController.UpdateUserInfor(Data.DTO.UserUpdateDto)">
+            <summary>
+            update information of current user (Gom tên đăng nhập, số điện thoại, không cập nhật gmail)
             </summary>
             <remarks>
             Sample request:
@@ -125,6 +116,8 @@
             
             Type: Cho thuê chính chủ = 0, tim bạn cùng phòng = 1
             
+            RoomType:  Homestay= 0, nguyên căn = 1, phòng đơn = 2
+            
             </remarks>
             <returns></returns>
             <response code="201">Detail of room</response>
@@ -143,6 +136,8 @@
             status:  đã cho thuê = 0, đang trống = 1, đang tim bạn cùng phòng = 2
             
             Type: Cho thuê chính chủ = 0, tim bạn cùng phòng = 1
+            
+            RoomType:  Homestay= 0, nguyên căn = 1, phòng đơn = 2
             
             </remarks>
             <returns></returns>

@@ -3,42 +3,21 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20211006173525_CreateNewTableCityArea")]
+    partial class CreateNewTableCityArea
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.10");
-
-            modelBuilder.Entity("Data.Entities.AwardArea", b =>
-                {
-                    b.Property<string>("AreaCode")
-                        .HasMaxLength(5)
-                        .HasColumnType("varchar(5)");
-
-                    b.Property<string>("AreaName")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("AreaType")
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("ProvinceCode")
-                        .HasMaxLength(5)
-                        .HasColumnType("varchar(5)");
-
-                    b.HasKey("AreaCode");
-
-                    b.ToTable("AwardAreas");
-                });
 
             modelBuilder.Entity("Data.Entities.CityArea", b =>
                 {
@@ -522,22 +501,22 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d2e910a5-c79f-4ad2-a1d8-472d20b29e07",
-                            ConcurrencyStamp = "5ec9436e-5906-4317-b410-0d12fab2ed8e",
+                            Id = "103ff0e0-2afc-4433-b0f6-fc543ab2087a",
+                            ConcurrencyStamp = "00cc1c77-693b-4719-abd3-105611fbddbb",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "ee9a6997-d070-4334-9f56-2734a23adf7e",
-                            ConcurrencyStamp = "83d6d17c-6bfc-47e7-9920-bde9429326e2",
+                            Id = "2c604ab2-322b-4eca-8168-450557caaa2b",
+                            ConcurrencyStamp = "f24074ba-ffc1-4671-a0a9-b9a03aa0f595",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "a5ce6abb-4735-4f3b-af3c-74639dad1514",
-                            ConcurrencyStamp = "5671cd8b-35b1-4317-bee3-d87ab3636b8a",
+                            Id = "54f387ae-a9a5-4e21-87bf-4d8967f8efa1",
+                            ConcurrencyStamp = "6b14dc40-6475-4d11-a5b1-90e5bf7b742e",
                             Name = "User",
                             NormalizedName = "USER"
                         });

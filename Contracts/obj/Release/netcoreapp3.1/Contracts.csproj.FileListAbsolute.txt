@@ -7,3 +7,12 @@ E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.A
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.csproj.CoreCompileInputs.cache
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.dll
 E:\Hoc-hanh\Do-an\ApiImpr\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\Contracts\bin\Release\netcoreapp3.1\Contracts.deps.json
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\Contracts\bin\Release\netcoreapp3.1\Contracts.dll
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\Contracts\bin\Release\netcoreapp3.1\Contracts.pdb
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.csprojAssemblyReference.cache
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.AssemblyInfoInputs.cache
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.AssemblyInfo.cs
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.csproj.CoreCompileInputs.cache
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.dll
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\Contracts\obj\Release\netcoreapp3.1\Contracts.pdb
