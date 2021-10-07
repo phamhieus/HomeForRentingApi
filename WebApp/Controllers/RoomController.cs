@@ -491,7 +491,24 @@ namespace AspImp.Controllers
       return Ok("Images had been deleted!");
     }
 
+
+    /// <summary>
+    /// Searching room api
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    /// 
+    /// Get /api/room/advange-searching?searchKey=
+    /// 
+    /// </remarks>
+    /// <returns></returns>
+    /// <response code="200">RoomDetail success</response>
+    /// <response code="401">If user didn't login </response>
     [HttpGet("room-searching")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(RoomSamurysResponseExample))]
+    [SwaggerResponseExample(StatusCodes.Status200OK, typeof(RoomSamurysResponseExample))]
     public IActionResult SearchRoomByKey(string searchKey)
     {
       if (string.IsNullOrEmpty(searchKey))
@@ -518,7 +535,7 @@ namespace AspImp.Controllers
     {
       if (searchingRoomRequest == null)
       {
-        return BadRequest();
+        searchingRoomRequest = new SearchingRoomRequest();
       }
 
       IEnumerable<Room> rooms = _repository.Room.GetRoomsRequest(searchingRoomRequest, trackChanges: false);
@@ -536,7 +553,11 @@ namespace AspImp.Controllers
     }
 
 
-    private RoomImage CreateNewRoomImage(Room room, User user, IFormFile imageFile, ImageType fileType)
+    private RoomImage CreateNewRoomImage(
+      Room room, 
+      User user, 
+      IFormFile imageFile, 
+      ImageType fileType)
     {
       try
       {
@@ -584,8 +605,9 @@ namespace AspImp.Controllers
 
         return roomImage;
       }
-      catch
+      catch(Exception e)
       {
+        _logger.LogError($"There are a error in CreateNewRoomImage : {e.Message} ")
         throw;
       }
     }
