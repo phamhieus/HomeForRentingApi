@@ -20,6 +20,7 @@ using AspImp.SwaggerExample;
 using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.Annotations;
 using Data.DTO.Responses;
+using Data.DTO.Requests;
 
 namespace AspImp.Controllers
 {
@@ -489,6 +490,51 @@ namespace AspImp.Controllers
 
       return Ok("Images had been deleted!");
     }
+
+    [HttpGet("room-searching")]
+    public IActionResult SearchRoomByKey(string searchKey)
+    {
+      if (string.IsNullOrEmpty(searchKey))
+      {
+        return BadRequest("key is not null");
+      }
+
+      IEnumerable<Room> rooms = _repository.Room.GetRoomsByKey(searchKey.ToLower(), trackChanges: false);
+      IEnumerable<RoomSamuryResponse> roomDtos = _mapper.Map<IEnumerable<RoomSamuryResponse>>(rooms);
+
+      foreach (var roomDto in roomDtos)
+      {
+        RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
+        RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
+
+        roomDto.ThumbnailImage = thumbnailDto;
+      }
+
+      return Ok(roomDtos);
+    }
+
+    [HttpPost("advange-searching")]
+    public IActionResult SearchRoom(SearchingRoomRequest searchingRoomRequest)
+    {
+      if (searchingRoomRequest == null)
+      {
+        return BadRequest();
+      }
+
+      IEnumerable<Room> rooms = _repository.Room.GetRoomsRequest(searchingRoomRequest, trackChanges: false);
+      IEnumerable<RoomSamuryResponse> roomDtos = _mapper.Map<IEnumerable<RoomSamuryResponse>>(rooms);
+
+      foreach (var roomDto in roomDtos)
+      {
+        RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
+        RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
+
+        roomDto.ThumbnailImage = thumbnailDto;
+      }
+
+      return Ok(roomDtos);
+    }
+
 
     private RoomImage CreateNewRoomImage(Room room, User user, IFormFile imageFile, ImageType fileType)
     {

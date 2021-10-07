@@ -9,5 +9,7 @@ namespace Repository.Interfaces
   public interface IAwardRepository
   {
     IEnumerable<AwardArea> GetAwardAreas(string provinceCode, bool trackChanges);
+
+    AwardArea GetAwardAreaById(string awardCode, bool trackChanges);
   }
 }

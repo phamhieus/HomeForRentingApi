@@ -10,12 +10,15 @@ namespace Repository.Implements
   {
     public CityRepository(DBContext repositoryContext) : base(repositoryContext)
     {
-
     }
 
     public IEnumerable<CityArea> GetAllCity(bool trackChanges) =>
      FindAll(trackChanges)
-     .OrderBy(c => c.AreaName)
-     .ToList();
+       .OrderBy(c => c.AreaName)
+       .ToList();
+
+    public CityArea GetCityById(string cityId, bool trackChanges) =>
+     FindByCondition(c=>c.AreaCode.Equals(cityId), trackChanges)
+       .SingleOrDefault();
   }
 }

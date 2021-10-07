@@ -9,5 +9,7 @@ namespace Repository.Interfaces
   public interface ICityRepository
   {
     IEnumerable<CityArea> GetAllCity(bool trackChanges);
+
+    CityArea GetCityById(string cityId, bool trackChanges);
   }
 }

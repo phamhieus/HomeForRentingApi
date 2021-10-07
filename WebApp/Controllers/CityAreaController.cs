@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GoogleMaps.LocationServices;
+
+using Microsoft.AspNetCore.Mvc;
 
 using Repository.Interfaces;
 
@@ -38,6 +40,31 @@ namespace AspImp.Controllers
     public IActionResult GetAwards(string provinceId)
     {
       return Ok(_repository.Award.GetAwardAreas(provinceId.ToString(), false));
+    }
+
+
+    [Microsoft.AspNetCore.Mvc.HttpGet("coordinates")]
+    public IActionResult GetCoordinates(string awardId, string provinceId, string cityId)
+    {
+      var award = _repository.Award.GetAwardAreaById(awardId, false);
+      var province = _repository.Province.GetProvinceById(provinceId, false);
+      var city = _repository.City.GetCityById(cityId, false);
+
+      if(award == null || province == null || city == null)
+      {
+        return NotFound("Address not found");
+      }
+
+      var address = $"{award.AreaName}, {province.AreaName}, {city.AreaName}";
+
+      var locationService = new GoogleLocationService("AIzaSyCVypGtzOqpZ0ocT45ds-hFbLRuEfKzivE");
+
+      var point = locationService.GetLatLongFromAddress(address);
+
+      var latitude = point.Latitude;
+      var longitude = point.Longitude;
+
+      return Ok(new { latitude, longitude });
     }
   }
 }

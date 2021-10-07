@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.DTO.Requests;
 using Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Repository.Interfaces
 
     public IEnumerable<Room> GetAllRooms(bool trackChanges) =>
      FindAll(trackChanges)
-     .OrderBy(c => c.CreateDate)
+     .OrderByDescending(c => c.CreateDate)
      .ToList();
 
     public void CreateRoom(Room room) => Create(room);
@@ -26,5 +27,27 @@ namespace Repository.Interfaces
     public void DeleteRoom(Room room) => Delete(room);
 
     public void UpdateRoom(Room room) => Update(room);
+
+    public IEnumerable<Room> GetRoomsByKey(string key, bool trackChanges) =>
+      FindByCondition(room => 
+        room.ShortName.ToLower().Contains(key)
+        || room.Description.ToLower().Contains(key),
+        false)
+     .OrderByDescending(c => c.CreateDate)
+     .ToList();
+
+    public IEnumerable<Room> GetRoomsRequest(SearchingRoomRequest searchingRoomRequest, bool trackChanges) =>
+      FindByCondition(room =>
+          (string.IsNullOrEmpty(searchingRoomRequest.CityId) || room.City == searchingRoomRequest.CityId)
+          && (string.IsNullOrEmpty(searchingRoomRequest.ProvinceId) || room.Province == searchingRoomRequest.ProvinceId)
+          && (string.IsNullOrEmpty(searchingRoomRequest.AwardId) || room.Street == searchingRoomRequest.AwardId)
+          && (searchingRoomRequest.MaxCost == null || room.Cost <= searchingRoomRequest.MaxCost)
+          && (searchingRoomRequest.MinCost == null || room.Cost >= searchingRoomRequest.MinCost)
+          && (searchingRoomRequest.RoomType == null || room.RoomType == searchingRoomRequest.RoomType)
+          && (searchingRoomRequest.Type == null || room.Type == searchingRoomRequest.Type),
+        false)
+      .ToList();
+
+
   }
 }

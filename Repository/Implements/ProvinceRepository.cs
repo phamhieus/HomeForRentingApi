@@ -17,6 +17,10 @@ namespace Repository.Implements
 
     }
 
+    public ProvinceArea GetProvinceById(string provinceCode, bool trackChanges) =>
+     FindByCondition(c => c.AreaCode.Equals(provinceCode), trackChanges)
+       .SingleOrDefault();
+
     public IEnumerable<ProvinceArea> GetProvincesOfCity(string cityCode, bool trackChanges) =>
       FindByCondition(p=>p.ParentArea.Equals(cityCode), trackChanges)
       .OrderBy(c => c.AreaName)

@@ -191,3 +191,4 @@ E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Release\netcoreapp
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Release\netcoreapp3.1\AspImp.dll
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Release\netcoreapp3.1\AspImp.pdb
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Release\netcoreapp3.1\AspImp.genruntimeconfig.cache
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\bin\Release\netcoreapp3.1\GoogleMaps.LocationServices.dll
