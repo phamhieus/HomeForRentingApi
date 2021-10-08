@@ -240,7 +240,6 @@ namespace AspImp.Controllers
     [SwaggerRequestExample(typeof(RoomDto), typeof(RoomDtoPostRequestExample))]
     [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(RoomDtoPostRequestExample))]
     [SwaggerResponseExample(StatusCodes.Status200OK, typeof(RoomDtoPostRequestExample))]
-
     public async Task<IActionResult> UpdateRoom(Guid id, [FromBody] RoomDto roomDto)
     {
       if (roomDto == null)
@@ -273,6 +272,100 @@ namespace AspImp.Controllers
 
       _repository.Room.UpdateRoom(room);
       _repository.Save();
+
+      return Ok(roomDto);
+    }
+
+    /// <summary>
+    /// get current user 's room 
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    /// 
+    ///  Get /api/room/{roomId}
+    ///   
+    /// </remarks>
+    /// <returns></returns>
+    /// <response code="200">Detail of room</response>
+    /// <response code="401">If user didn't login </response>  
+    [HttpGet("my-room")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(RoomDtoDetailResponseExample))]
+    [SwaggerResponseExample(StatusCodes.Status200OK, typeof(RoomDtoDetailResponseExample))]
+    public async Task<IActionResult> GetRoomMyRoom()
+    {
+      try
+      {
+        Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        User user = await _userManager.FindByIdAsync(userId.Value);
+
+        IEnumerable<Room> rooms = _repository.Room.GetMyRoom(user.Id, trackChanges: false);
+        IEnumerable<RoomSamuryResponse> roomDtos = _mapper.Map<IEnumerable<RoomSamuryResponse>>(rooms);
+
+        foreach (var roomDto in roomDtos)
+        {
+          RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
+          RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
+
+          roomDto.ThumbnailImage = thumbnailDto;
+        }
+
+        return Ok(roomDtos);
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError($"Something went wrong in the {nameof(GetRoomMyRoom)} action {ex}");
+        return StatusCode(500, "Internal server error");
+      }
+    }
+
+    /// <summary>
+    /// update room api
+    /// </summary>
+    /// <remarks>
+    /// Sample request:
+    /// 
+    /// PUT /api/room/{roomId}
+    /// 
+    /// status:  đã cho thuê = 0, đang trống = 1, đang tim bạn cùng phòng = 2
+    /// 
+    /// Type: Cho thuê chính chủ = 0, tim bạn cùng phòng = 1
+    /// 
+    /// RoomType:  Homestay= 0, nguyên căn = 1, phòng đơn = 2
+    /// 
+    /// </remarks>
+    /// <returns></returns>
+    /// <response code="200">Detail of room</response>
+    /// <response code="401">If user didn't login </response>
+    /// <response code="400">If one property is invalid </response>  
+    [HttpPut("room-solt-out/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(RoomDtoPostRequestExample))]
+    [SwaggerResponseExample(StatusCodes.Status200OK, typeof(RoomDtoPostRequestExample))]
+    public async Task<IActionResult> UpdateRoomSoldOut(Guid id)
+    {
+      Room room = _repository.Room.GetRoom(id, trackChanges: false);
+
+      if (room == null)
+      {
+        _logger.LogInfo($"Room with id: {id} doesn't exist in the database.");
+        return NotFound("Room not fond");
+      }
+
+      Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+      User user = await _userManager.FindByIdAsync(userId.Value);
+
+      room.Status = RoomStatus.SoltOut;
+      room.UpdateDate = DateTime.Now;
+      room.UpdatedBy = user.Id;
+
+      _repository.Room.UpdateRoom(room);
+      _repository.Save();
+
+      var roomDto = _mapper.Map<RoomDto>(room);
 
       return Ok(roomDto);
     }
@@ -607,7 +700,7 @@ namespace AspImp.Controllers
       }
       catch(Exception e)
       {
-        _logger.LogError($"There are a error in CreateNewRoomImage : {e.Message} ")
+        _logger.LogError($"There are a error in CreateNewRoomImage : {e.Message} ");
         throw;
       }
     }

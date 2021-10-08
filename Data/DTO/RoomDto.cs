@@ -30,6 +30,8 @@ namespace Data.DTO
 
     [Required(ErrorMessage = "City is a required field.")]
     public string City { get; set; }
+    
+    public DateTime CreateDate { get; set; }
 
     public RoomType Type { get; set; }
 

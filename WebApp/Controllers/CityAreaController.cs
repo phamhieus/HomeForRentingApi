@@ -57,7 +57,7 @@ namespace AspImp.Controllers
 
       var address = $"{award.AreaName}, {province.AreaName}, {city.AreaName}";
 
-      var locationService = new GoogleLocationService("AIzaSyCVypGtzOqpZ0ocT45ds-hFbLRuEfKzivE");
+      var locationService = new GoogleLocationService("AIzaSyDKQazlHfJNQB4b2WGDi3l7ZdmalItmtJ8");
 
       var point = locationService.GetLatLongFromAddress(address);
 
@@ -66,5 +66,6 @@ namespace AspImp.Controllers
 
       return Ok(new { latitude, longitude });
     }
+
   }
 }

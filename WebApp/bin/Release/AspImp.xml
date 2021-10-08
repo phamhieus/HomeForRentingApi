@@ -145,6 +145,41 @@
             <response code="401">If user didn't login </response>
             <response code="400">If one property is invalid </response>  
         </member>
+        <member name="M:AspImp.Controllers.RoomController.GetRoomMyRoom">
+            <summary>
+            get current user 's room 
+            </summary>
+            <remarks>
+            Sample request:
+            
+             Get /api/room/{roomId}
+              
+            </remarks>
+            <returns></returns>
+            <response code="200">Detail of room</response>
+            <response code="401">If user didn't login </response>  
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.UpdateRoomSoldOut(System.Guid)">
+            <summary>
+            update room api
+            </summary>
+            <remarks>
+            Sample request:
+            
+            PUT /api/room/{roomId}
+            
+            status:  đã cho thuê = 0, đang trống = 1, đang tim bạn cùng phòng = 2
+            
+            Type: Cho thuê chính chủ = 0, tim bạn cùng phòng = 1
+            
+            RoomType:  Homestay= 0, nguyên căn = 1, phòng đơn = 2
+            
+            </remarks>
+            <returns></returns>
+            <response code="200">Detail of room</response>
+            <response code="401">If user didn't login </response>
+            <response code="400">If one property is invalid </response>  
+        </member>
         <member name="M:AspImp.Controllers.RoomController.DeleteRoom(System.Guid)">
             <summary>
             delete room api
@@ -216,6 +251,20 @@
             <response code="200">Upload success</response>
             <response code="401">If user didn't login </response>
             <response code="404">If room is not found </response> 
+        </member>
+        <member name="M:AspImp.Controllers.RoomController.SearchRoomByKey(System.String)">
+            <summary>
+            Searching room api
+            </summary>
+            <remarks>
+            Sample request:
+            
+            Get /api/room/advange-searching?searchKey=
+            
+            </remarks>
+            <returns></returns>
+            <response code="200">RoomDetail success</response>
+            <response code="401">If user didn't login </response>
         </member>
     </members>
 </doc>

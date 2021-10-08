@@ -18,7 +18,12 @@ namespace Repository.Interfaces
       .SingleOrDefault();
 
     public IEnumerable<Room> GetAllRooms(bool trackChanges) =>
-     FindAll(trackChanges)
+     FindByCondition(r=>r.Status == Data.Common.RoomStatus.Empty, trackChanges)
+     .OrderByDescending(c => c.CreateDate)
+     .ToList();
+
+    public IEnumerable<Room> GetMyRoom(string userId, bool trackChanges) =>
+     FindByCondition(r => r.CreatedBy == userId, trackChanges)
      .OrderByDescending(c => c.CreateDate)
      .ToList();
 

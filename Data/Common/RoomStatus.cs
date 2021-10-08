@@ -6,8 +6,8 @@ namespace Data.Common
 {
   public enum RoomStatus
   {
+    Waiting,
     Empty,
-    Rented,
-    FindingRoomate
+    SoltOut
   }
 }

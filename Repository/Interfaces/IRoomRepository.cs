@@ -11,6 +11,8 @@ namespace Repository.Interfaces
 
     IEnumerable<Room> GetAllRooms(bool trackChanges);
 
+    IEnumerable<Room> GetMyRoom(string userId, bool trackChanges);
+
     IEnumerable<Room> GetRoomsByKey(string key, bool trackChanges);
 
     IEnumerable<Room> GetRoomsRequest(SearchingRoomRequest searchingRoomRequest, bool trackChanges);
