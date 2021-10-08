@@ -635,6 +635,8 @@ namespace AspImp.Controllers
         return BadRequest("key is not null");
       }
 
+      searchKey = searchKey.Replace("\"","");
+
       IEnumerable<Room> rooms = _repository.Room.GetRoomsByKey(searchKey.ToLower(), trackChanges: false);
       IEnumerable<RoomSamuryResponse> roomDtos = _mapper.Map<IEnumerable<RoomSamuryResponse>>(rooms);
 

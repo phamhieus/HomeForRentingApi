@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.Common;
 using Data.DTO.Requests;
 using Data.Entities;
 using System;
@@ -34,12 +35,11 @@ namespace Repository.Interfaces
     public void UpdateRoom(Room room) => Update(room);
 
     public IEnumerable<Room> GetRoomsByKey(string key, bool trackChanges) =>
-      FindByCondition(room => 
-        room.ShortName.ToLower().Contains(key)
-        || room.Description.ToLower().Contains(key),
-        false)
-     .OrderByDescending(c => c.CreateDate)
-     .ToList();
+      FindByCondition(room => room.ShortName.ToLower().Contains(key)
+        || room.Address.ToLower().Contains(key)
+        || room.Description.ToLower().Contains(key), 
+      trackChanges);
+    
 
     public IEnumerable<Room> GetRoomsRequest(SearchingRoomRequest searchingRoomRequest, bool trackChanges) =>
       FindByCondition(room =>
@@ -49,7 +49,8 @@ namespace Repository.Interfaces
           && (searchingRoomRequest.MaxCost == null || room.Cost <= searchingRoomRequest.MaxCost)
           && (searchingRoomRequest.MinCost == null || room.Cost >= searchingRoomRequest.MinCost)
           && (searchingRoomRequest.RoomType == null || room.RoomType == searchingRoomRequest.RoomType)
-          && (searchingRoomRequest.Type == null || room.Type == searchingRoomRequest.Type),
+          && (searchingRoomRequest.Type == null || room.Type == searchingRoomRequest.Type)
+          && room.Status == RoomStatus.Empty,
         false)
       .ToList();
 
