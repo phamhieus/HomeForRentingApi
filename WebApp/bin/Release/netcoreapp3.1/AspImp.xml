@@ -145,7 +145,7 @@
             <response code="401">If user didn't login </response>
             <response code="400">If one property is invalid </response>  
         </member>
-        <member name="M:AspImp.Controllers.RoomController.GetRoomMyRoom">
+        <member name="M:AspImp.Controllers.RoomController.GetRoomMyRoom(System.String)">
             <summary>
             get current user 's room 
             </summary>

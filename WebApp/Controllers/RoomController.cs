@@ -288,17 +288,29 @@ namespace AspImp.Controllers
     /// <returns></returns>
     /// <response code="200">Detail of room</response>
     /// <response code="401">If user didn't login </response>  
-    [HttpGet("my-room")]
+    [HttpGet("profile-room")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(RoomDtoDetailResponseExample))]
     [SwaggerResponseExample(StatusCodes.Status200OK, typeof(RoomDtoDetailResponseExample))]
-    public async Task<IActionResult> GetRoomMyRoom()
+    public async Task<IActionResult> GetRoomMyRoom(string userId)
     {
       try
       {
-        Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        User user = await _userManager.FindByIdAsync(userId.Value);
+        string currentUserId = userId;
+
+        if (string.IsNullOrEmpty(userId))
+        {
+          Claim userIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+          currentUserId = userIdClaim.Value;
+        }
+
+        User user = await _userManager.FindByIdAsync(currentUserId);
+
+        if(user == null)
+        {
+          return NotFound("User not found");
+        }
 
         IEnumerable<Room> rooms = _repository.Room.GetMyRoom(user.Id, trackChanges: false);
         IEnumerable<RoomSamuryResponse> roomDtos = _mapper.Map<IEnumerable<RoomSamuryResponse>>(rooms);
