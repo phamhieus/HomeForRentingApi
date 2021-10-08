@@ -19,7 +19,7 @@ namespace Repository.Interfaces
       .SingleOrDefault();
 
     public IEnumerable<Room> GetAllRooms(bool trackChanges) =>
-     FindByCondition(r=>r.Status == Data.Common.RoomStatus.Empty, trackChanges)
+     FindByCondition(r=>r.Status != Data.Common.RoomStatus.SoltOut, trackChanges)
      .OrderByDescending(c => c.CreateDate)
      .ToList();
 
