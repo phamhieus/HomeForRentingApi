@@ -18,7 +18,7 @@ namespace Repository.Implements
 
     public AwardArea GetAwardAreaById(string awardCode, bool trackChanges) =>
      FindByCondition(c => c.AreaCode.Equals(awardCode), trackChanges)
-       .SingleOrDefault();
+       .FirstOrDefault();
 
     public IEnumerable<AwardArea> GetAwardAreas(string provinceCode, bool trackChanges) =>
        FindByCondition(p => p.ProvinceCode.Equals(provinceCode), trackChanges)

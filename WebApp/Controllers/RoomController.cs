@@ -21,6 +21,7 @@ using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.Annotations;
 using Data.DTO.Responses;
 using Data.DTO.Requests;
+using GoogleMaps.LocationServices;
 
 namespace AspImp.Controllers
 {
@@ -107,42 +108,55 @@ namespace AspImp.Controllers
     [SwaggerResponseExample(StatusCodes.Status201Created, typeof(RoomDtoDetailResponseExample))]
     public async Task<IActionResult> GetRoomById(Guid id)
     {
+
+      Room room = _repository.Room.GetRoom(id, trackChanges: false);
+      RoomDetailResponse roomDetailRequest = _mapper.Map<RoomDetailResponse>(room);
+
+      if (room == null)
+      {
+        return NotFound("Room is not found");
+      }
+
+      IEnumerable<RoomImage> roomDescriptionImages = _repository.RoomImage.GetImagesOfRoom(room.Id, false);
+      IEnumerable<RoomImageDto> roomDescriptionImageDtos = _mapper.Map<IEnumerable<RoomImageDto>>(roomDescriptionImages);
+
+      RoomImage roomThumbnailImage = _repository.RoomImage.GetThumbnailImagesOfRoom(room.Id, false);
+      RoomImageDto roomThumbnailImageDto = _mapper.Map<RoomImageDto>(roomThumbnailImage);
+
+      User user = await _userManager.FindByIdAsync(room.CreatedBy);
+      UserDetailResponse userDetailResponse = _mapper.Map<UserDetailResponse>(user);
+
+      UserImage userImage = _repository.UserImage.GetUserThumbnail(user.Id, false);
+      UserImageDto userImageDto = _mapper.Map<UserImageDto>(userImage);
+
+      string address = room.Address;
+
       try
       {
-        Room room = _repository.Room.GetRoom(id, trackChanges: false);
-        RoomDetailResponse roomDetailRequest = _mapper.Map<RoomDetailResponse>(room);
+        var award = _repository.Award.GetAwardAreaById(room.Street, false);
+        var province = _repository.Province.GetProvinceById(room.Province, false);
+        var city = _repository.City.GetCityById(room.City, false);
 
-        if(room == null)
+        if (award != null && province != null && city != null)
         {
-          return NotFound("Room is not found");
+          address = $"{award.AreaName}, {province.AreaName}, {city.AreaName}, Việt Nam";
         }
-
-        IEnumerable<RoomImage> roomDescriptionImages = _repository.RoomImage.GetImagesOfRoom(room.Id, false);
-        IEnumerable<RoomImageDto> roomDescriptionImageDtos = _mapper.Map<IEnumerable<RoomImageDto>>(roomDescriptionImages);
-
-        RoomImage roomThumbnailImage = _repository.RoomImage.GetThumbnailImagesOfRoom(room.Id, false);
-        RoomImageDto roomThumbnailImageDto = _mapper.Map<RoomImageDto>(roomThumbnailImage);
-
-        User user = await _userManager.FindByIdAsync(room.CreatedBy);
-        UserDetailResponse userDetailResponse = _mapper.Map<UserDetailResponse>(user);
-
-        UserImage userImage = _repository.UserImage.GetUserThumbnail(user.Id, false);
-        UserImageDto userImageDto = _mapper.Map<UserImageDto>(userImage);
-
-        userDetailResponse.ThumbnailImage = userImageDto;
-
-        roomDetailRequest.ThumbnailImage = roomThumbnailImageDto;
-        roomDetailRequest.DescriptionImages = roomDescriptionImageDtos;
-        roomDetailRequest.Owner = userDetailResponse;
-
-        return Ok(roomDetailRequest);
       }
-      catch (Exception ex)
-      {
-        _logger.LogError($"Something went wrong in the {nameof(GetRoomById)} action {ex}");
+      catch { }
 
-        return StatusCode(500, "Internal server error");
-      }
+      var locationService = new GoogleLocationService("AIzaSyDKQazlHfJNQB4b2WGDi3l7ZdmalItmtJ8");
+      var point = locationService.GetLatLongFromAddress(address);
+
+      userDetailResponse.ThumbnailImage = userImageDto;
+
+      roomDetailRequest.Longitude = point.Longitude;
+      roomDetailRequest.Latitude = point.Latitude;
+
+      roomDetailRequest.ThumbnailImage = roomThumbnailImageDto;
+      roomDetailRequest.DescriptionImages = roomDescriptionImageDtos;
+      roomDetailRequest.Owner = userDetailResponse;
+
+      return Ok(roomDetailRequest);
     }
 
     /// <summary>
@@ -307,7 +321,7 @@ namespace AspImp.Controllers
 
         User user = await _userManager.FindByIdAsync(currentUserId);
 
-        if(user == null)
+        if (user == null)
         {
           return NotFound("User not found");
         }
@@ -538,7 +552,7 @@ namespace AspImp.Controllers
         {
           RoomImage roomImage = CreateNewRoomImage(room, user, imageFile, ImageType.DescriptionImage);
           roomImageDtos.Add(_mapper.Map<RoomImageDto>(roomImage));
-         
+
           if (isFirstImage)
           {
             CreateNewRoomImage(room, user, imageFile, ImageType.Thumbnail);
@@ -659,9 +673,9 @@ namespace AspImp.Controllers
 
 
     private RoomImage CreateNewRoomImage(
-      Room room, 
-      User user, 
-      IFormFile imageFile, 
+      Room room,
+      User user,
+      IFormFile imageFile,
       ImageType fileType)
     {
       try
@@ -679,11 +693,11 @@ namespace AspImp.Controllers
           UpdatedBy = user.Id
         };
 
-        if ( fileType == ImageType.Thumbnail)
+        if (fileType == ImageType.Thumbnail)
         {
           RoomImage previousThumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(room.Id, false);
 
-          if(previousThumbnail != null)
+          if (previousThumbnail != null)
           {
             previousThumbnail.IsActive = false;
             _repository.RoomImage.UpdateRoomImage(previousThumbnail);
@@ -710,7 +724,7 @@ namespace AspImp.Controllers
 
         return roomImage;
       }
-      catch(Exception e)
+      catch (Exception e)
       {
         _logger.LogError($"There are a error in CreateNewRoomImage : {e.Message} ");
         throw;

@@ -66,6 +66,5 @@ namespace AspImp.Controllers
 
       return Ok(new { latitude, longitude });
     }
-
   }
 }

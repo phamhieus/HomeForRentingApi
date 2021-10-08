@@ -12,5 +12,9 @@ namespace Data.DTO.Responses
     public IEnumerable<RoomImageDto> DescriptionImages { get; set; }
 
     public UserDetailResponse Owner { get; set; }
+
+    public double Latitude { get; set; }
+
+    public double Longitude { get; set; }
   }
 }

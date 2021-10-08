@@ -18,7 +18,7 @@ namespace Repository.Implements
        .ToList();
 
     public CityArea GetCityById(string cityId, bool trackChanges) =>
-     FindByCondition(c=>c.AreaCode.Equals(cityId), trackChanges)
-       .SingleOrDefault();
+     FindByCondition(c=>c.AreaCode == cityId, trackChanges)
+       .FirstOrDefault();
   }
 }
