@@ -32,9 +32,11 @@ namespace AspImp.Extensions
     public static void ConfigureCors(this IServiceCollection services) =>
       services.AddCors(opt =>
         opt.AddPolicy("CorsPolicy", builder =>
-          builder.AllowAnyOrigin()
+          builder
+          .AllowAnyOrigin()
           .AllowAnyMethod()
           .AllowAnyHeader()
+          .AllowCredentials()
     ));
 
     public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>

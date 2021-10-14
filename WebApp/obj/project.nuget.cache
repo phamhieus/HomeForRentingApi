@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "QURbtgKqgoBUbhnSwPXaQgFVciHq4MCMqMQ7ikIQHqMsVZRqTWCp7+L3AL6Iwi2BGL3/aPjzHHOlXOUHsZx++Q==",
+  "dgSpecHash": "uta5DzmvObsabjj4m+Y10uld3CS5Ph+3N8mEF3f73IhnFpIgL4MrOAj6+m5rCOVhIKLcaGE46CNdsPLxo4H7CA==",
   "success": true,
   "projectFilePath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\WebApp\\AspImp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\phamb\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
+    "C:\\Users\\phamb\\.nuget\\packages\\elasticsearch.net\\7.15.0\\elasticsearch.net.7.15.0.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\google.protobuf\\3.14.0\\google.protobuf.3.14.0.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\googlemaps.locationservices\\1.2.0.5\\googlemaps.locationservices.1.2.0.5.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
@@ -79,6 +80,7 @@
     "C:\\Users\\phamb\\.nuget\\packages\\mysql.data\\8.0.24\\mysql.data.8.0.24.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\mysql.entityframeworkcore\\5.0.3\\mysql.entityframeworkcore.5.0.3.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\mysqlconnector\\1.3.12\\mysqlconnector.1.3.12.nupkg.sha512",
+    "C:\\Users\\phamb\\.nuget\\packages\\nest\\7.15.0\\nest.7.15.0.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\nlog\\4.7.7\\nlog.4.7.7.nupkg.sha512",

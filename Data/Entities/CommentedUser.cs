@@ -12,7 +12,7 @@ namespace Data.Entities
     public string Content { get; set; }
 
     [ForeignKey(nameof(User))]
-    public Guid EvaluatedUser { get; set; }
+    public string EvaluatedUser { get; set; }
 
     [ForeignKey(nameof(CommentedUser))]
     public Guid ReferenceComment { get; set; }

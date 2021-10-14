@@ -50,6 +50,7 @@ namespace Repository.Interfaces
           && (searchingRoomRequest.MinCost == null || room.Cost >= searchingRoomRequest.MinCost)
           && (searchingRoomRequest.RoomType == null || room.RoomType == searchingRoomRequest.RoomType)
           && (searchingRoomRequest.Type == null || room.Type == searchingRoomRequest.Type)
+          && (searchingRoomRequest.Gender == null || room.Gender == searchingRoomRequest.Gender)
           && room.Status == RoomStatus.Empty,
         false)
       .ToList();

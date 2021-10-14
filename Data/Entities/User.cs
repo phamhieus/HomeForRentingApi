@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Data.Common;
+using Microsoft.AspNetCore.Identity;
 
 namespace Data.Entities
 {
@@ -10,5 +7,6 @@ namespace Data.Entities
   {
     public string FirstName { get; set; }
     public string LastName { get; set; }
+    public GenderType Gender { get; set; }
   }
 }

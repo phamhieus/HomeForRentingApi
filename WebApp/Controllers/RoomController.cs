@@ -22,6 +22,8 @@ using Swashbuckle.AspNetCore.Annotations;
 using Data.DTO.Responses;
 using Data.DTO.Requests;
 using GoogleMaps.LocationServices;
+using Nest;
+using AspImp.Extensions;
 
 namespace AspImp.Controllers
 {
@@ -34,6 +36,8 @@ namespace AspImp.Controllers
     private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
     private readonly FileService _fileService;
+    private readonly GoogleLocationService locationService;
+
     public RoomController(
       IRepositoryManager repository,
       ILoggerManager logger,
@@ -46,6 +50,8 @@ namespace AspImp.Controllers
       _logger = logger;
       _mapper = mapper;
       _fileService = fileService;
+
+      locationService = new GoogleLocationService("AIzaSyC3kewbfW0PJjrbevIDrddru0-rOoQPcYk");
     }
 
     /// <summary>
@@ -108,7 +114,6 @@ namespace AspImp.Controllers
     [SwaggerResponseExample(StatusCodes.Status201Created, typeof(RoomDtoDetailResponseExample))]
     public async Task<IActionResult> GetRoomById(Guid id)
     {
-
       Room room = _repository.Room.GetRoom(id, trackChanges: false);
       RoomDetailResponse roomDetailRequest = _mapper.Map<RoomDetailResponse>(room);
 
@@ -144,7 +149,6 @@ namespace AspImp.Controllers
       }
       catch { }
 
-      var locationService = new GoogleLocationService("AIzaSyDKQazlHfJNQB4b2WGDi3l7ZdmalItmtJ8");
       var point = locationService.GetLatLongFromAddress(address);
 
       userDetailResponse.ThumbnailImage = userImageDto;
@@ -635,7 +639,7 @@ namespace AspImp.Controllers
         return BadRequest("key is not null");
       }
 
-      searchKey = searchKey.Replace("\"","");
+      searchKey = searchKey.Replace("\"", "");
 
       IEnumerable<Room> rooms = _repository.Room.GetRoomsByKey(searchKey.ToLower(), trackChanges: false);
       IEnumerable<RoomSamuryResponse> roomDtos = _mapper.Map<IEnumerable<RoomSamuryResponse>>(rooms);
@@ -673,6 +677,64 @@ namespace AspImp.Controllers
       return Ok(roomDtos);
     }
 
+    [HttpGet("search-by-coord")]
+    public IActionResult SearchByLocation(double longitude, double latitude)
+    {
+      var point = new MapPoint()
+      {
+        Longitude = longitude, 
+        Latitude = latitude
+      };
+      var rooms = _repository.Room.GetAllRooms(false);
+
+      IList<RoomGRPSeacrchingResponse> roomDtos = new List<RoomGRPSeacrchingResponse>();
+
+      foreach (var room in rooms)
+      {
+        RoomGRPSeacrchingResponse roomDto = GetRoomInformationAndLocation(room, point);
+        roomDtos.Add(roomDto);
+      }
+
+      roomDtos = roomDtos.OrderBy(dto => dto.Distance).ToList();
+
+      return Ok(roomDtos);
+    }
+
+    private RoomGRPSeacrchingResponse GetRoomInformationAndLocation(Room room, MapPoint recentPoint)
+    {
+      var roomDto = _mapper.Map<RoomGRPSeacrchingResponse>(room);
+
+      RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
+      RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
+
+      roomDto.ThumbnailImage = thumbnailDto;
+
+      MapPoint point = GetRoomCoord(room);
+
+      roomDto.Distance = point.GetDistanceTo(recentPoint);
+
+      return roomDto;
+    }
+
+    private MapPoint GetRoomCoord(Room room)
+    {
+      string address = room.Address;
+
+      try
+      {
+        var award = _repository.Award.GetAwardAreaById(room.Street, false);
+        var province = _repository.Province.GetProvinceById(room.Province, false);
+        var city = _repository.City.GetCityById(room.City, false);
+
+        if (award != null && province != null && city != null)
+        {
+          address = $"{award.AreaName}, {province.AreaName}, {city.AreaName}, Việt Nam";
+        }
+      }
+      catch { }
+
+      return locationService.GetLatLongFromAddress(address);
+    }
 
     private RoomImage CreateNewRoomImage(
       Room room,

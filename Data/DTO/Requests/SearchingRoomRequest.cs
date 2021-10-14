@@ -15,5 +15,6 @@ namespace Data.DTO.Requests
     public long? MaxCost { get; set; }
     public RoomType? Type { get; set; }
     public RentingType? RoomType { get; set; }
+    public GenderType? Gender { get; set; }
   }
 }

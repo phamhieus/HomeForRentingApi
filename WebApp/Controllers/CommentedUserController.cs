@@ -86,7 +86,7 @@ namespace AspImp.Controllers
       }
 
       Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-      User user = await _userManager.FindByNameAsync(userId.Value);
+      User user = await _userManager.FindByIdAsync(userId.Value);
 
       CommentedUser commentedUser = _mapper.Map<CommentedUser>(commentedUserDto);
 
@@ -101,7 +101,7 @@ namespace AspImp.Controllers
 
       CommentedUserDto commentedUserToReturn = _mapper.Map<CommentedUserDto>(commentedUser);
 
-      return CreatedAtRoute(
+      return CreatedAtAction(
         "GetCommentedUserById",
         new
         {
@@ -135,7 +135,7 @@ namespace AspImp.Controllers
       }
 
       Claim userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-      User user = await _userManager.FindByNameAsync(userId.Value);
+      User user = await _userManager.FindByIdAsync(userId.Value);
 
       _mapper.Map(commentedUserDto, commentedUser);
 
@@ -164,6 +164,15 @@ namespace AspImp.Controllers
       _repository.Save();
 
       return Ok("CommentedUser had been deleted!");
+    }
+
+    [HttpGet("user")]
+    public IActionResult GetCommentOfUser(string userId)
+    {
+      IEnumerable<CommentedUser> commentedUsers = _repository.CommentedUser.GetAllCommentsOfUser(userId, trackChanges: false);
+      IEnumerable<CommentedUserDto> commentedUserDtos = _mapper.Map<IEnumerable<CommentedUserDto>>(commentedUsers);
+
+      return Ok(commentedUserDtos);
     }
   }
 }

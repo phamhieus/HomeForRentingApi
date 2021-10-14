@@ -281,3 +281,5 @@ E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Release\netcoreapp
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Release\netcoreapp3.1\Razor\Views\Home\Edit.cshtml.g.cs
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Release\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\obj\Release\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\bin\Release\netcoreapp3.1\Elasticsearch.Net.dll
+E:\Hoc-hanh\Do-an\ApiImpr\HomeForRentingApi\AspImp\WebApp\bin\Release\netcoreapp3.1\Nest.dll

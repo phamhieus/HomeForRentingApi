@@ -43,6 +43,7 @@ namespace AspImp.Mapper
     {
       CreateMap<Room, RoomSamuryResponse>();
       CreateMap<Room, RoomDetailResponse>();
+      CreateMap<Room, RoomGRPSeacrchingResponse>();
       CreateMap<RoomDto, Room>().ReverseMap();
 
       CreateMap<RoomImage, RoomImageDto>()

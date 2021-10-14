@@ -8,15 +8,15 @@ namespace Data.DTO
 {
   public class CommentedUserDto
   {
+    public Guid Id { get; set; }
+
     public int RatingStar { get; set; }
 
     public string Content { get; set; }
 
-    public Guid EvaluatedUser { get; set; }
+    public string EvaluatedUser { get; set; }
 
-    public CommentedUser ReferenceComment { get; set; }
-
-    public Guid Id { get; set; }
+    public Guid ReferenceComment { get; set; }
 
     public DateTime CreateDate { get; set; }
 

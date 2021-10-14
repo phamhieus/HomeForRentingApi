@@ -15,13 +15,18 @@ namespace Repository.Implements
     }
 
     public CommentedUser GetCommentedUser(Guid id, bool trackChanges) =>
-    FindByCondition(c => c.Id.Equals(id), trackChanges)
-    .SingleOrDefault();
+      FindByCondition(c => c.Id.Equals(id), trackChanges)
+        .SingleOrDefault();
 
     public IEnumerable<CommentedUser> GetAllCommentedUsers(bool trackChanges) =>
      FindAll(trackChanges)
      .OrderBy(c => c.CreateDate)
      .ToList();
+
+    public IEnumerable<CommentedUser> GetAllCommentsOfUser(string userId, bool trackChanges) =>
+      FindByCondition(cmt=>cmt.EvaluatedUser.Equals(userId) , trackChanges)
+       .OrderBy(c => c.CreateDate)
+       .ToList();
 
     public void CreateCommentedUser(CommentedUser commentedUser) => Create(commentedUser);
 

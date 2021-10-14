@@ -3,14 +3,16 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20211014024355_updateImageTableStatus1")]
+    partial class updateImageTableStatus1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,8 +76,9 @@ namespace Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<string>("EvaluatedUser")
-                        .HasColumnType("text");
+                    b.Property<byte[]>("EvaluatedUser")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
 
                     b.Property<int>("RatingStar")
                         .HasColumnType("int");
@@ -527,22 +530,22 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "45a6051f-7c00-4613-bad5-3cdd7874bfdc",
-                            ConcurrencyStamp = "7039cc7d-a89f-4999-9b63-f0d058492fa9",
+                            Id = "f090759d-138b-4d59-a475-dfc99e065bb2",
+                            ConcurrencyStamp = "712fcf07-21d3-485b-83d5-aa9ec7810fa7",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "e4bbf890-23e2-4cb8-85f5-cf149ae10f6f",
-                            ConcurrencyStamp = "cc0ae489-f367-42fc-8620-08682c6b5448",
+                            Id = "19a2388c-8d96-4966-a43d-4777b20db04b",
+                            ConcurrencyStamp = "0b87769d-2690-4f22-8672-20174d3723b0",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "f1777687-5861-4d2e-8770-05f987b0548f",
-                            ConcurrencyStamp = "016e49dd-2d64-4f0a-9d9f-29c06b425d28",
+                            Id = "5dc84a82-ec5b-40bd-8be5-e5a5db5e7334",
+                            ConcurrencyStamp = "468c971a-1468-4595-b99a-3cc40f1210af",
                             Name = "User",
                             NormalizedName = "USER"
                         });

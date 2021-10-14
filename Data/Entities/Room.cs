@@ -32,6 +32,8 @@ namespace Data.Entities
     [Required(ErrorMessage = "Cost is a required field.")]
     public long Cost { get; set; }
 
+    public GenderType Gender { get; set; }
+
     public int Mounth { get; set; }
 
     public int Year { get; set; }
