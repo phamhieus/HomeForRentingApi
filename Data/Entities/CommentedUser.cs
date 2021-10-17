@@ -16,5 +16,7 @@ namespace Data.Entities
 
     [ForeignKey(nameof(CommentedUser))]
     public Guid ReferenceComment { get; set; }
+
+    public string CommentByUserName { get; set; }
   }
 }

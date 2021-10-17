@@ -1,21 +1,21 @@
 using AspImp.Extensions;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
-
 using System.IO;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Net;
 using System;
-using System.Reflection;
-using Microsoft.OpenApi.Models;
 using AspImp.Services;
-using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.Linq;
+using Lib.AspNetCore.ServerSentEvents;
+using AspImp.Services.Interfaces;
+using AspImp.Services.Impliments;
 
 namespace AspImp
 {
@@ -47,6 +47,18 @@ namespace AspImp
         options.MemoryBufferThreshold = Int32.MaxValue;
       });
 
+      // Register default ServerSentEventsService.
+      services.AddServerSentEvents();
+      // Registers custom ServerSentEventsService which will be used by second middleware, otherwise they would end up sharing connected users.
+      services.AddServerSentEvents<IServerSentEventsService, ServerSentEventsService>(options =>
+      {
+        options.ReconnectInterval = 5000;
+      });
+      services.AddResponseCompression(options =>
+      {
+        options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "text/event-stream" });
+      });
+
       services.ConfigureSqlContext(Configuration);
       services.ConfigureRepositoryManager();
       services.ConfigureJWT(Configuration);
@@ -54,6 +66,7 @@ namespace AspImp
       services.ConfigureIdentity();
       services.ConfigureSwagger();
       services.ConfigureAuth();
+      services.ConfigureSSE();
 
       services.AddControllers();
       services.AddAuthentication();
@@ -76,9 +89,14 @@ namespace AspImp
         ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
       });
 
+      app.UseCors(x => x
+         .AllowAnyOrigin()
+         .AllowAnyMethod()
+         .AllowAnyHeader());
+      
+      app.UseResponseCompression();
       app.UseHttpsRedirection();
       app.UseStaticFiles();
-
       app.UseRouting();
 
       app.UseAuthentication();
@@ -87,6 +105,7 @@ namespace AspImp
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
+        endpoints.MapServerSentEvents<ServerSentEventsService>("/notifications");
       });
 
       app.UseSwagger();

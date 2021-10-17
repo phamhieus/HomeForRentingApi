@@ -24,6 +24,7 @@ using Data.DTO.Requests;
 using GoogleMaps.LocationServices;
 using Nest;
 using AspImp.Extensions;
+using AspImp.Services.Interfaces;
 
 namespace AspImp.Controllers
 {
@@ -31,6 +32,7 @@ namespace AspImp.Controllers
   [ApiController, Authorize]
   public class RoomController : ControllerBase
   {
+    #region Fields
     private readonly UserManager<User> _userManager;
     private readonly IRepositoryManager _repository;
     private readonly ILoggerManager _logger;
@@ -38,11 +40,15 @@ namespace AspImp.Controllers
     private readonly FileService _fileService;
     private readonly GoogleLocationService locationService;
 
+    private readonly INotificationsService _notificationsService;
+    #endregion
+
     public RoomController(
       IRepositoryManager repository,
       ILoggerManager logger,
       IMapper mapper,
       UserManager<User> userManager,
+      INotificationsService notificationsService,
       FileService fileService)
     {
       _userManager = userManager;
@@ -50,6 +56,7 @@ namespace AspImp.Controllers
       _logger = logger;
       _mapper = mapper;
       _fileService = fileService;
+      _notificationsService = notificationsService;
 
       locationService = new GoogleLocationService("AIzaSyC3kewbfW0PJjrbevIDrddru0-rOoQPcYk");
     }
@@ -671,8 +678,23 @@ namespace AspImp.Controllers
         RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
         RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
 
+        if(searchingRoomRequest.Latitude != null && searchingRoomRequest.Longitude!=null)
+        {
+          var room = rooms.Where(r => r.Id.Equals(roomDto.Id)).FirstOrDefault();
+          var point = new MapPoint()
+          {
+            Longitude = searchingRoomRequest.Longitude.Value,
+            Latitude = searchingRoomRequest.Latitude.Value
+          };
+
+          roomDto.Distance = GetRoomInformationAndLocation(room, point).Distance;
+        }
+
         roomDto.ThumbnailImage = thumbnailDto;
       }
+
+      if (searchingRoomRequest.Latitude != null && searchingRoomRequest.Longitude != null)
+        roomDtos = roomDtos.OrderBy(dto => dto.Distance).ToList();
 
       return Ok(roomDtos);
     }
@@ -687,11 +709,11 @@ namespace AspImp.Controllers
       };
       var rooms = _repository.Room.GetAllRooms(false);
 
-      IList<RoomGRPSeacrchingResponse> roomDtos = new List<RoomGRPSeacrchingResponse>();
+      IList<RoomSamuryResponse> roomDtos = new List<RoomSamuryResponse>();
 
       foreach (var room in rooms)
       {
-        RoomGRPSeacrchingResponse roomDto = GetRoomInformationAndLocation(room, point);
+        RoomSamuryResponse roomDto = GetRoomInformationAndLocation(room, point);
         roomDtos.Add(roomDto);
       }
 
@@ -700,9 +722,9 @@ namespace AspImp.Controllers
       return Ok(roomDtos);
     }
 
-    private RoomGRPSeacrchingResponse GetRoomInformationAndLocation(Room room, MapPoint recentPoint)
+    private RoomSamuryResponse GetRoomInformationAndLocation(Room room, MapPoint recentPoint)
     {
-      var roomDto = _mapper.Map<RoomGRPSeacrchingResponse>(room);
+      var roomDto = _mapper.Map<RoomSamuryResponse>(room);
 
       RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
       RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
@@ -714,6 +736,27 @@ namespace AspImp.Controllers
       roomDto.Distance = point.GetDistanceTo(recentPoint);
 
       return roomDto;
+    }
+
+    [HttpGet("notication-test")]
+    public Task TestNotification()
+    {
+       return _notificationsService.SendNotificationAsync("Phong test da duoc xet duyet", false);
+    }
+
+    [HttpPut("accessed-room/{id}")]
+    public IActionResult ApproveRoom(Guid id)
+    {
+      Room room = _repository.Room.GetRoom(id, trackChanges: false);
+
+      room.Status = RoomStatus.Empty;
+      
+      _repository.Room.UpdateRoom(room);
+      _repository.Save();
+
+      _notificationsService.SendNotificationAsync($"Phòng {room.ShortName} đã được admin xét duyệt.", false);
+
+      return Ok();
     }
 
     private MapPoint GetRoomCoord(Room room)

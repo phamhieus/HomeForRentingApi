@@ -120,6 +120,18 @@
           "lib/netstandard2.0/K4os.Hash.xxHash.dll": {}
         }
       },
+      "Lib.AspNetCore.ServerSentEvents/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/Lib.AspNetCore.ServerSentEvents.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Lib.AspNetCore.ServerSentEvents.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNet.WebApi.Client/4.0.20710": {
         "type": "package",
         "dependencies": {
@@ -3359,6 +3371,25 @@
         "lib/netstandard1.6/K4os.Hash.xxHash.xml",
         "lib/netstandard2.0/K4os.Hash.xxHash.dll",
         "lib/netstandard2.0/K4os.Hash.xxHash.xml"
+      ]
+    },
+    "Lib.AspNetCore.ServerSentEvents/6.0.0": {
+      "sha512": "nYrZn/wJ7nnFUHN5TOMG2c40jQagVEsJa5xgkHtUhVkurBFgXsMaOr6d3ho1XjwBn9e5IoaLjXiNy+/wbd/RnA==",
+      "type": "package",
+      "path": "lib.aspnetcore.serversentevents/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib.aspnetcore.serversentevents.6.0.0.nupkg.sha512",
+        "lib.aspnetcore.serversentevents.nuspec",
+        "lib/net461/Lib.AspNetCore.ServerSentEvents.dll",
+        "lib/net461/Lib.AspNetCore.ServerSentEvents.xml",
+        "lib/net5.0/Lib.AspNetCore.ServerSentEvents.dll",
+        "lib/net5.0/Lib.AspNetCore.ServerSentEvents.xml",
+        "lib/netcoreapp2.1/Lib.AspNetCore.ServerSentEvents.dll",
+        "lib/netcoreapp2.1/Lib.AspNetCore.ServerSentEvents.xml",
+        "lib/netcoreapp3.1/Lib.AspNetCore.ServerSentEvents.dll",
+        "lib/netcoreapp3.1/Lib.AspNetCore.ServerSentEvents.xml"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/4.0.20710": {
@@ -10033,6 +10064,7 @@
       "Contracts >= 1.0.0",
       "Data >= 1.0.0",
       "GoogleMaps.LocationServices >= 1.2.0.5",
+      "Lib.AspNetCore.ServerSentEvents >= 6.0.0",
       "LoggerService >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.0",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.10",
@@ -10119,6 +10151,10 @@
           "GoogleMaps.LocationServices": {
             "target": "Package",
             "version": "[1.2.0.5, )"
+          },
+          "Lib.AspNetCore.ServerSentEvents": {
+            "target": "Package",
+            "version": "[6.0.0, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",

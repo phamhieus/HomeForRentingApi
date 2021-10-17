@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using AspImp.Services.Interfaces;
+
+using AutoMapper;
 using Contracts;
 using Data.DTO;
 using Data.Entities;
@@ -18,6 +20,7 @@ namespace AspImp.Controllers
   [ApiController, Authorize]
   public class CommentedUserController : ControllerBase
   {
+    private readonly INotificationsService _notificationsService;
     private readonly UserManager<User> _userManager;
     private readonly IRepositoryManager _repository;
     private readonly ILoggerManager _logger;
@@ -26,9 +29,11 @@ namespace AspImp.Controllers
     public CommentedUserController(
       IRepositoryManager repository, 
       ILoggerManager logger, 
-      IMapper mapper, 
+      IMapper mapper,
+      INotificationsService notificationsService,
       UserManager<User> userManager)
     {
+      _notificationsService = notificationsService;
       _userManager = userManager;
       _repository = repository;
       _logger = logger;
@@ -96,8 +101,12 @@ namespace AspImp.Controllers
       commentedUser.CreatedBy = user.Id;
       commentedUser.UpdatedBy = user.Id;
 
+      commentedUser.CommentByUserName = user.UserName;
+
       _repository.CommentedUser.CreateCommentedUser(commentedUser);
       _repository.Save();
+
+      await _notificationsService.SendNotificationAsync($"Người dùng {user.UserName} vừa đánh giá bạn.", false);
 
       CommentedUserDto commentedUserToReturn = _mapper.Map<CommentedUserDto>(commentedUser);
 
@@ -169,6 +178,11 @@ namespace AspImp.Controllers
     [HttpGet("user")]
     public IActionResult GetCommentOfUser(string userId)
     {
+      if (string.IsNullOrEmpty(userId))
+      {
+        userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+      }
+
       IEnumerable<CommentedUser> commentedUsers = _repository.CommentedUser.GetAllCommentsOfUser(userId, trackChanges: false);
       IEnumerable<CommentedUserDto> commentedUserDtos = _mapper.Map<IEnumerable<CommentedUserDto>>(commentedUsers);
 

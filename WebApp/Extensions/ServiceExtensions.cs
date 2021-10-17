@@ -21,6 +21,8 @@ using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 using System.IO;
+using AspImp.Services.Interfaces;
+using AspImp.Services.Impliments;
 
 namespace AspImp.Extensions
 {
@@ -36,7 +38,6 @@ namespace AspImp.Extensions
           .AllowAnyOrigin()
           .AllowAnyMethod()
           .AllowAnyHeader()
-          .AllowCredentials()
     ));
 
     public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
@@ -127,5 +128,8 @@ namespace AspImp.Extensions
 
       services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
     }
+  
+    public static void ConfigureSSE(this IServiceCollection services) =>
+       services.AddTransient<INotificationsService, NotificationsService>();
   }
 }

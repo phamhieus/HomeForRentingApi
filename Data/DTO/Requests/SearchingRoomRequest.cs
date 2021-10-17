@@ -16,5 +16,8 @@ namespace Data.DTO.Requests
     public RoomType? Type { get; set; }
     public RentingType? RoomType { get; set; }
     public GenderType? Gender { get; set; }
+
+    public double? Longitude { set; get; }
+    public double? Latitude { get; set; }
   }
 }

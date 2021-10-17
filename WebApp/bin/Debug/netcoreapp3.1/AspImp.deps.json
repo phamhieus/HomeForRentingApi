@@ -35,6 +35,7 @@
           "Contracts": "1.0.0",
           "Data": "1.0.0",
           "GoogleMaps.LocationServices": "1.2.0.5",
+          "Lib.AspNetCore.ServerSentEvents": "6.0.0",
           "LoggerService": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.0",
           "Microsoft.EntityFrameworkCore.Design": "5.0.10",
@@ -457,6 +458,17 @@
         },
         "compile": {
           "lib/netstandard2.0/K4os.Hash.xxHash.dll": {}
+        }
+      },
+      "Lib.AspNetCore.ServerSentEvents/6.0.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/Lib.AspNetCore.ServerSentEvents.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Lib.AspNetCore.ServerSentEvents.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/4.0.20710": {
@@ -4479,6 +4491,13 @@
       "sha512": "sha512-jCfNP0inx1sGcP3KSbpiDEH3km2e1sVBjMfKo+V92jr1dL4ZYgA1uhRMl1wAtdGZcbObXIikKqtVlgx3j/CW6g==",
       "path": "k4os.hash.xxhash/1.0.6",
       "hashPath": "k4os.hash.xxhash.1.0.6.nupkg.sha512"
+    },
+    "Lib.AspNetCore.ServerSentEvents/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nYrZn/wJ7nnFUHN5TOMG2c40jQagVEsJa5xgkHtUhVkurBFgXsMaOr6d3ho1XjwBn9e5IoaLjXiNy+/wbd/RnA==",
+      "path": "lib.aspnetcore.serversentevents/6.0.0",
+      "hashPath": "lib.aspnetcore.serversentevents.6.0.0.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/4.0.20710": {
       "type": "package",

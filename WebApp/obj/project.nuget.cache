@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "uta5DzmvObsabjj4m+Y10uld3CS5Ph+3N8mEF3f73IhnFpIgL4MrOAj6+m5rCOVhIKLcaGE46CNdsPLxo4H7CA==",
+  "dgSpecHash": "lva05wi+g0d9xqb1cNl6LGzN955t7LwZeUlq07qupjbA+rJaiJ+QU4Vt/JeVbuAVwoY9dDW5o1emuDeBUrO3KQ==",
   "success": true,
   "projectFilePath": "E:\\Hoc-hanh\\Do-an\\ApiImpr\\HomeForRentingApi\\AspImp\\WebApp\\AspImp.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "C:\\Users\\phamb\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
+    "C:\\Users\\phamb\\.nuget\\packages\\lib.aspnetcore.serversentevents\\6.0.0\\lib.aspnetcore.serversentevents.6.0.0.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\microsoft.aspnet.webapi.client\\4.0.20710\\microsoft.aspnet.webapi.client.4.0.20710.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\microsoft.aspnet.webapi.core\\4.0.20710\\microsoft.aspnet.webapi.core.4.0.20710.nupkg.sha512",
     "C:\\Users\\phamb\\.nuget\\packages\\microsoft.aspnet.webapi.webhost\\4.0.20710\\microsoft.aspnet.webapi.webhost.4.0.20710.nupkg.sha512",

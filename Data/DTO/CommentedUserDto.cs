@@ -15,6 +15,7 @@ namespace Data.DTO
     public string Content { get; set; }
 
     public string EvaluatedUser { get; set; }
+    public string CommentByUserName { get; set; }
 
     public Guid ReferenceComment { get; set; }
 
