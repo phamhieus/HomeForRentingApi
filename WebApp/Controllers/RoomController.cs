@@ -252,6 +252,7 @@ namespace AspImp.Controllers
       };
 
       _repository.Notification.CreateNotification(notification);
+      _repository.Save();
 
       RoomDto roomToReturn = _mapper.Map<RoomDto>(room);
 

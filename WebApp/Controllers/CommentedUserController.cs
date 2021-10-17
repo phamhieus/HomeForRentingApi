@@ -116,6 +116,7 @@ namespace AspImp.Controllers
       };
 
       _repository.Notification.CreateNotification(notification);
+      _repository.Save();
 
       CommentedUserDto commentedUserToReturn = _mapper.Map<CommentedUserDto>(commentedUser);
 
