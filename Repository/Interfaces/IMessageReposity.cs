@@ -6,16 +6,18 @@ using System.Text;
 
 namespace Repository.Interfaces
 {
-  public interface IMessageRepository
+  public interface INotificationRepository
   {
-    Message GetMessage(Guid id, bool trackChanges);
+    Notification GetNotification(Guid id, bool trackChanges);
 
-    IEnumerable<Message> GetAllMessages(bool trackChanges);
+    IEnumerable<Notification> GetAllNotifications(bool trackChanges);
 
-    void CreateMessage(Message message);
+    IEnumerable<Notification> GetNotificationsOfUser(string userId, bool trackChanges);
 
-    void DeleteMessage(Message message);
+    void CreateNotification(Notification notification);
 
-    void UpdateMessage(Message message);
+    void DeleteNotification(Notification notification);
+
+    void UpdateNotification(Notification notification);
   }
 }

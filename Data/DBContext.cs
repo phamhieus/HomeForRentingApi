@@ -25,7 +25,7 @@ namespace Data
     public DbSet<Company> Companies { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Room> Rooms { get; set; }
-    public DbSet<Message> Messages { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
     public DbSet<CommentedUser> CommentedUsers { get; set; }
     public DbSet<RoomImage> RoomImages { get; set; }
     public DbSet<UserImage> UserImages { get; set; }

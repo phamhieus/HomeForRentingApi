@@ -7,25 +7,31 @@ using System.Linq;
 
 namespace Repository.Implements
 {
-  public class MessageRepository : RepositoryBase<Message>, IMessageRepository
+  public class NotificationRepository : RepositoryBase<Notification>, INotificationRepository
   {
-    public MessageRepository(DBContext repositoryContext) : base(repositoryContext)
+    public NotificationRepository(DBContext repositoryContext) : base(repositoryContext)
     {
     }
 
-    public Message GetMessage(Guid id, bool trackChanges) =>
+    public Notification GetNotification(Guid id, bool trackChanges) =>
       FindByCondition(c => c.Id.Equals(id), trackChanges)
       .SingleOrDefault();
 
-    public IEnumerable<Message> GetAllMessages(bool trackChanges) =>
+    public IEnumerable<Notification> GetAllNotifications(bool trackChanges) =>
      FindAll(trackChanges)
      .OrderBy(c => c.SentDate)
      .ToList();
 
-    public void CreateMessage(Message message) => Create(message);
+    public void CreateNotification(Notification notification) => Create(notification);
 
-    public void DeleteMessage(Message message) => Delete(message);
+    public void DeleteNotification(Notification notification) => Delete(notification);
 
-    public void UpdateMessage(Message message) => Update(message);
+    public void UpdateNotification(Notification notification) => Update(notification);
+
+    public IEnumerable<Notification> GetNotificationsOfUser(string userId, bool trackChanges)=>
+      FindByCondition(c => c.ToUser.Equals(userId), trackChanges)
+      .OrderByDescending(n=>n.SentDate)
+      .ToList();
+
   }
 }

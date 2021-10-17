@@ -5,18 +5,17 @@ using System.Text;
 
 namespace Data.Entities
 {
-  public class Message
+  public class Notification
   {
     public Guid Id { get; set; }
 
     [ForeignKey(nameof(User))]
-    public Guid FromUser { get; set; }
+    public string ToUser { get; set; }
 
-    [ForeignKey(nameof(User))]
-    public Guid ToUser { get; set; }
-
-    public string Content { get; set; }
+    public string Message { get; set; }
 
     public DateTime SentDate { get; set; }
+
+    public bool IsSeen { get; set; }
   }
 }

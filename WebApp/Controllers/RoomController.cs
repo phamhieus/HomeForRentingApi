@@ -90,6 +90,8 @@ namespace AspImp.Controllers
           RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
           RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
 
+          GetCityName(roomDto);
+
           roomDto.ThumbnailImage = thumbnailDto;
         }
 
@@ -128,6 +130,18 @@ namespace AspImp.Controllers
       {
         return NotFound("Room is not found");
       }
+
+      try
+      {
+        var award = _repository.Award.GetAwardAreaById(roomDetailRequest.Street, false);
+        var province = _repository.Province.GetProvinceById(roomDetailRequest.Province, false);
+        var city = _repository.City.GetCityById(roomDetailRequest.Street, false);
+
+        roomDetailRequest.City = city.AreaName;
+        roomDetailRequest.Province = province.AreaName;
+        roomDetailRequest.Street = award.AreaName;
+      }
+      catch { }
 
       IEnumerable<RoomImage> roomDescriptionImages = _repository.RoomImage.GetImagesOfRoom(room.Id, false);
       IEnumerable<RoomImageDto> roomDescriptionImageDtos = _mapper.Map<IEnumerable<RoomImageDto>>(roomDescriptionImages);
@@ -223,9 +237,21 @@ namespace AspImp.Controllers
 
       room.Mounth = DateTime.Now.Month;
       room.Year = DateTime.Now.Month;
+      room.Status = RoomStatus.Empty;
 
       _repository.Room.CreateRoom(room);
       _repository.Save();
+
+      await _notificationsService.SendNotificationAsync($"Phòng {room.ShortName} đã được admin xét duyệt.", false);
+
+      Notification notification = new Notification
+      {
+        Message = $"Phòng {room.ShortName} đã được admin xét duyệt.",
+        SentDate = DateTime.Now,
+        ToUser = user.Id
+      };
+
+      _repository.Notification.CreateNotification(notification);
 
       RoomDto roomToReturn = _mapper.Map<RoomDto>(room);
 
@@ -655,6 +681,8 @@ namespace AspImp.Controllers
       {
         RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
         RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
+       
+        GetCityName(roomDto);
 
         roomDto.ThumbnailImage = thumbnailDto;
       }
@@ -677,8 +705,10 @@ namespace AspImp.Controllers
       {
         RoomImage thumbnail = _repository.RoomImage.GetThumbnailImagesOfRoom(roomDto.Id, false);
         RoomImageDto thumbnailDto = _mapper.Map<RoomImageDto>(thumbnail);
+        
+        GetCityName(roomDto);
 
-        if(searchingRoomRequest.Latitude != null && searchingRoomRequest.Longitude!=null)
+        if (searchingRoomRequest.Latitude != null && searchingRoomRequest.Longitude!=null)
         {
           var room = rooms.Where(r => r.Id.Equals(roomDto.Id)).FirstOrDefault();
           var point = new MapPoint()
@@ -714,6 +744,9 @@ namespace AspImp.Controllers
       foreach (var room in rooms)
       {
         RoomSamuryResponse roomDto = GetRoomInformationAndLocation(room, point);
+     
+        GetCityName(roomDto);
+
         roomDtos.Add(roomDto);
       }
 
@@ -836,6 +869,21 @@ namespace AspImp.Controllers
         _logger.LogError($"There are a error in CreateNewRoomImage : {e.Message} ");
         throw;
       }
+    }
+  
+    public void GetCityName(RoomSamuryResponse dto)
+    {
+      try
+      {
+        var award = _repository.Award.GetAwardAreaById(dto.Street, false);
+        var province = _repository.Province.GetProvinceById(dto.Province, false);
+        var city = _repository.City.GetCityById(dto.City, false);
+
+        dto.City = city.AreaName;
+        dto.Province = province.AreaName;
+        dto.Street = award.AreaName;
+      }
+      catch { }
     }
   }
 }

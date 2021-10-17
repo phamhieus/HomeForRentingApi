@@ -17,13 +17,7 @@ namespace AspImp.Mapper
 
       CreateUserMaping();
       CreateRoomMaping();
-      CreateMessageMaping();
       CreateCommentedUserMaping();
-    }
-
-    public void CreateMessageMaping()
-    {
-      CreateMap<Message, MessageDto>().ReverseMap();
     }
 
     public void CreateUserMaping()

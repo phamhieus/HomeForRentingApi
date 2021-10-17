@@ -12,7 +12,7 @@ namespace Repository.Implements
     private ICommentedUserRepository _commentedUserRepository;
     private IRoomImageRepository _roomImageRepository;
     private IEmployeeRepository _employeeRepository;
-    private IMessageRepository _messageRepository;
+    private INotificationRepository _notificationRepository;
     private IRoomRepository _roomRepository;
     private ICityRepository _cityRepository;
     private IProvinceRepository _provinceRepository;
@@ -49,16 +49,16 @@ namespace Repository.Implements
       }
     }
 
-    public IMessageRepository Message
+    public INotificationRepository Notification
     {
       get
       {
-        if (_messageRepository == null)
+        if (_notificationRepository == null)
         {
-          _messageRepository = new MessageRepository(_context);
+          _notificationRepository = new NotificationRepository(_context);
         }
 
-        return _messageRepository;
+        return _notificationRepository;
       }
     }
 

@@ -8,7 +8,7 @@
 
     ICommentedUserRepository CommentedUser { get; }
 
-    IMessageRepository Message { get; }
+    INotificationRepository Notification { get; }
 
     IRoomRepository Room { get; }
 

@@ -3,14 +3,16 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20211017095901_updateImageTableStatus5")]
+    partial class updateImageTableStatus5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -233,9 +235,6 @@ namespace Data.Migrations
                     b.Property<byte[]>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("varbinary(16)");
-
-                    b.Property<bool>("IsSeen")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Message")
                         .HasColumnType("text");
@@ -528,22 +527,22 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4c675ee-9a81-45a3-84c8-132c5f23c4d0",
-                            ConcurrencyStamp = "3952eb16-384a-4004-9bc8-b41ea089e772",
+                            Id = "47a4c9ae-b051-4650-9ed0-666af63e6f06",
+                            ConcurrencyStamp = "78fa8d56-9852-49f7-af83-8fbe010b3722",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "969fd4c6-2f20-4f46-a432-5b55cbc804ea",
-                            ConcurrencyStamp = "16daeef0-22d5-409d-9b35-b4f0a9698dbd",
+                            Id = "a2461ea1-6325-4277-b30a-216ca638694e",
+                            ConcurrencyStamp = "6e8a11d2-cccc-4343-a5af-907074b40bd3",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "93c62ad3-ec84-450a-8e87-8ab9a1c34b9a",
-                            ConcurrencyStamp = "094af4bb-84d7-4630-a6a4-7eae2347c369",
+                            Id = "10f3e2d7-4f3f-4def-926a-ea5c0d8206a2",
+                            ConcurrencyStamp = "a8e80572-fa17-498c-8312-d9810171f63e",
                             Name = "User",
                             NormalizedName = "USER"
                         });

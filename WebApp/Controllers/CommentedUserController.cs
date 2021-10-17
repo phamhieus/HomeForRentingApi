@@ -108,6 +108,15 @@ namespace AspImp.Controllers
 
       await _notificationsService.SendNotificationAsync($"Người dùng {user.UserName} vừa đánh giá bạn.", false);
 
+      Notification notification = new Notification
+      {
+        Message = $"Người dùng {user.UserName} vừa đánh giá bạn.",
+        SentDate = DateTime.Now,
+        ToUser = user.Id
+      };
+
+      _repository.Notification.CreateNotification(notification);
+
       CommentedUserDto commentedUserToReturn = _mapper.Map<CommentedUserDto>(commentedUser);
 
       return CreatedAtAction(
