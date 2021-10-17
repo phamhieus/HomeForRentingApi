@@ -872,7 +872,7 @@ namespace AspImp.Controllers
       }
     }
   
-    public void GetCityName(RoomSamuryResponse dto)
+    private void GetCityName(RoomSamuryResponse dto)
     {
       try
       {

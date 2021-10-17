@@ -164,7 +164,7 @@ namespace AspImp.Controllers
       _repository.CommentedUser.UpdateCommentedUser(commentedUser);
       _repository.Save();
 
-      return Ok(commentedUserDto);
+      return Ok(_repository.CommentedUser.GetAllCommentsOfUser(commentedUser.EvaluatedUser, trackChanges: false));
     }
 
 
@@ -178,11 +178,11 @@ namespace AspImp.Controllers
         _logger.LogInfo($"CommentedUser with id: {id} doesn't exist in the database.");
         return NotFound("CommentedUser doesn't exist in the database.");
       }
-
+      string userID = commentedUser.EvaluatedUser;
       _repository.CommentedUser.DeleteCommentedUser(commentedUser);
       _repository.Save();
 
-      return Ok("CommentedUser had been deleted!");
+      return Ok(_repository.CommentedUser.GetAllCommentsOfUser(userID, trackChanges: false));
     }
 
     [HttpGet("user")]
