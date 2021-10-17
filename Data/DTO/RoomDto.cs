@@ -37,6 +37,8 @@ namespace Data.DTO
 
     public RentingType RoomType { get; set; }
 
+    public GenderType Gender { get; set; }
+
     public RoomStatus Status { get; set; }
   }
 }
