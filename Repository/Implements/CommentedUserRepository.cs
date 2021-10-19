@@ -28,6 +28,11 @@ namespace Repository.Implements
        .OrderBy(c => c.CreateDate)
        .ToList();
 
+    public IEnumerable<CommentedUser> GetAllCommentsOfUser(string userId, string evaluatedUser, bool trackChanges)=>
+      FindByCondition(cmt => cmt.EvaluatedUser.Equals(evaluatedUser) && cmt.CreatedBy.Equals(userId), trackChanges)
+       .OrderBy(c => c.CreateDate)
+       .ToList();
+
     public void CreateCommentedUser(CommentedUser commentedUser) => Create(commentedUser);
 
     public void DeleteCommentedUser(CommentedUser commentedUser) => Delete(commentedUser);

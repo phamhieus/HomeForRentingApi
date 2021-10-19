@@ -14,6 +14,8 @@ namespace Repository.Interfaces
 
     IEnumerable<CommentedUser> GetAllCommentsOfUser(string userId, bool trackChanges);
 
+    IEnumerable<CommentedUser> GetAllCommentsOfUser(string userId, string evaluatedUser, bool trackChanges);
+
     void CreateCommentedUser(CommentedUser commentedUser);
 
     void DeleteCommentedUser(CommentedUser commentedUser);

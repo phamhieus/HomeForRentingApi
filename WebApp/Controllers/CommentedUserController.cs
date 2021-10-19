@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -188,8 +189,15 @@ namespace AspImp.Controllers
     [HttpDelete("user/{id}")]
     public IActionResult DeleteAllCommentOfUser(string id)
     {
-      IEnumerable<CommentedUser> commentedUsers = _repository.CommentedUser.GetAllCommentsOfUser(id, trackChanges: false);
+      if(string.IsNullOrEmpty(id))
+      {
+        return BadRequest();
+      }
+
+      string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
       
+      IEnumerable<CommentedUser> commentedUsers = _repository.CommentedUser.GetAllCommentsOfUser(id, userId, trackChanges: false);
+
       foreach(CommentedUser comment in commentedUsers)
       {
         _repository.CommentedUser.DeleteCommentedUser(comment);
@@ -197,7 +205,10 @@ namespace AspImp.Controllers
 
       _repository.Save();
 
-      return Ok("Delete completed");
+      IEnumerable<CommentedUser> commentedOfUser = _repository.CommentedUser.GetAllCommentsOfUser(userId, trackChanges: false);
+      IEnumerable<CommentedUserDto> commentedUserDtos = _mapper.Map<IEnumerable<CommentedUserDto>>(commentedOfUser);
+
+      return Ok(commentedUserDtos);
     }
 
 
