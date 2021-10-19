@@ -199,12 +199,16 @@ namespace AspImp.Controllers
       
       IEnumerable<CommentedUser> commentedUsers = _repository.CommentedUser.GetAllCommentsOfUser(id, userId, trackChanges: false);
 
+      if(!commentedUsers.Any())
+      {
+        commentedUsers = _repository.CommentedUser.GetAllCommentsOfUser(userId, id, trackChanges: false);
+      }  
+  
       foreach(CommentedUser comment in commentedUsers)
       {
         _repository.CommentedUser.DeleteCommentedUser(comment);
         _repository.Save();
       }
-
 
       IEnumerable<CommentedUser> commentedOfUser = _repository.CommentedUser.GetAllCommentsOfUser(userId, trackChanges: false);
       IEnumerable<CommentedUserDto> commentedUserDtos = _mapper.Map<IEnumerable<CommentedUserDto>>(commentedOfUser);
