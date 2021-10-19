@@ -788,7 +788,7 @@ namespace AspImp.Controllers
       _repository.Room.UpdateRoom(room);
       _repository.Save();
 
-      _notificationsService.SendNotificationAsync($"Phòng {room.ShortName} đã được admin xét duyệt.", false);
+      _notificationsService.SendNotificationAsync($"Phong {room.ShortName} da duoc admin xet duyet.", false);
 
       return Ok();
     }

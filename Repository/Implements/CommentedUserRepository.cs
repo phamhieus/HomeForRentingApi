@@ -29,7 +29,11 @@ namespace Repository.Implements
        .ToList();
 
     public IEnumerable<CommentedUser> GetAllCommentsOfUser(string userId, string evaluatedUser, bool trackChanges)=>
-      FindByCondition(cmt => cmt.EvaluatedUser.Equals(evaluatedUser) && cmt.CreatedBy.Equals(userId), trackChanges)
+      FindByCondition(cmt => 
+        cmt.EvaluatedUser.Equals(evaluatedUser) 
+        && ( cmt.CreatedBy.Equals(userId) 
+          || cmt.UpdatedBy.Equals(userId)), 
+        trackChanges)
        .OrderBy(c => c.CreateDate)
        .ToList();
 

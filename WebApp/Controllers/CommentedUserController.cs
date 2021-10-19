@@ -107,11 +107,11 @@ namespace AspImp.Controllers
       _repository.CommentedUser.CreateCommentedUser(commentedUser);
       _repository.Save();
 
-      await _notificationsService.SendNotificationAsync($"Người dùng {user.UserName} vừa đánh giá bạn.", false);
+      await _notificationsService.SendNotificationAsync($"{user.UserName} vừa để lại 1 đánh giá.", false);
 
       Notification notification = new Notification
       {
-        Message = $"Người dùng {user.UserName} vừa đánh giá bạn.",
+        Message = $"{user.UserName} vua danh gia ban.",
         SentDate = DateTime.Now,
         ToUser = user.Id
       };
@@ -119,20 +119,21 @@ namespace AspImp.Controllers
       _repository.Notification.CreateNotification(notification);
       _repository.Save();
 
-      CommentedUserDto commentedUserToReturn = _mapper.Map<CommentedUserDto>(commentedUser);
+      IEnumerable<CommentedUser> commentedUsers = _repository.CommentedUser.GetAllCommentsOfUser(commentedUserDto.EvaluatedUser, trackChanges: false);
+      IEnumerable<CommentedUserDto> commentedUserDtos = _mapper.Map<IEnumerable<CommentedUserDto>>(commentedUsers);
 
       return CreatedAtAction(
-        "GetCommentedUserById",
+        "GetCommentOfUser",
         new
         {
-          id = commentedUserToReturn.Id
+          userId = commentedUser.EvaluatedUser
         },
-        commentedUserToReturn
+        commentedUserDtos
       );
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateCommentedUser(Guid id, [FromBody] CommentedUserDto commentedUserDto)
+    public async Task<IActionResult> UpdateCommentedUser(string id, [FromBody] CommentedUserDto commentedUserDto)
     {
       if (commentedUserDto == null)
       {
@@ -146,7 +147,7 @@ namespace AspImp.Controllers
         return UnprocessableEntity(ModelState);
       }
 
-      CommentedUser commentedUser = _repository.CommentedUser.GetCommentedUser(id, trackChanges: false);
+      CommentedUser commentedUser = _repository.CommentedUser.GetAllCommentsOfUser(id, trackChanges: false).FirstOrDefault();
 
       if (commentedUser == null)
       {
@@ -158,11 +159,11 @@ namespace AspImp.Controllers
       User user = await _userManager.FindByIdAsync(userId.Value);
 
       _mapper.Map(commentedUserDto, commentedUser);
-
+      
       commentedUser.UpdateDate = DateTime.Now;
       commentedUser.UpdatedBy = user.Id;
 
-      _repository.CommentedUser.UpdateCommentedUser(commentedUser);
+      //_repository.CommentedUser.UpdateCommentedUser(commentedUser);
       _repository.Save();
 
       return Ok(_repository.CommentedUser.GetAllCommentsOfUser(commentedUser.EvaluatedUser, trackChanges: false));
@@ -201,9 +202,9 @@ namespace AspImp.Controllers
       foreach(CommentedUser comment in commentedUsers)
       {
         _repository.CommentedUser.DeleteCommentedUser(comment);
+        _repository.Save();
       }
 
-      _repository.Save();
 
       IEnumerable<CommentedUser> commentedOfUser = _repository.CommentedUser.GetAllCommentsOfUser(userId, trackChanges: false);
       IEnumerable<CommentedUserDto> commentedUserDtos = _mapper.Map<IEnumerable<CommentedUserDto>>(commentedOfUser);
