@@ -185,6 +185,22 @@ namespace AspImp.Controllers
       return Ok(_repository.CommentedUser.GetAllCommentsOfUser(userID, trackChanges: false));
     }
 
+    [HttpDelete("user/{id}")]
+    public IActionResult DeleteAllCommentOfUser(string id)
+    {
+      IEnumerable<CommentedUser> commentedUsers = _repository.CommentedUser.GetAllCommentsOfUser(id, trackChanges: false);
+      
+      foreach(CommentedUser comment in commentedUsers)
+      {
+        _repository.CommentedUser.DeleteCommentedUser(comment);
+      }
+
+      _repository.Save();
+
+      return Ok("Delete completed");
+    }
+
+
     [HttpGet("user")]
     public IActionResult GetCommentOfUser(string userId)
     {
